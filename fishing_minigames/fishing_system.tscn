@@ -1,0 +1,128 @@
+[gd_scene load_steps=14 format=3 uid="uid://bxf3h3pu0htoa"]
+
+[ext_resource type="Script" uid="uid://b3xar2qf4p0lq" path="res://fishing_minigames/fishing_system.gd" id="1_h4yvn"]
+[ext_resource type="Script" uid="uid://c3vfowirpsvnq" path="res://fishing_minigames/state_machine/state_machine.gd" id="2_k1ehf"]
+[ext_resource type="Script" uid="uid://bicm5muuxnb17" path="res://fishing_minigames/casting/casting_state.gd" id="3_bb444"]
+[ext_resource type="Script" uid="uid://hnxhfijc1jlc" path="res://fishing_minigames/reeling/reeling_state.gd" id="4_xi2u0"]
+[ext_resource type="Script" uid="uid://dih6brdi1cxgx" path="res://fishing_minigames/hooked/hooked_state.gd" id="5_n2vtn"]
+[ext_resource type="Script" uid="uid://cs5x5bdp4wcay" path="res://fishing_minigames/landing/landing_state.gd" id="6_d7i3u"]
+[ext_resource type="Script" uid="uid://bf34x2658hkaw" path="res://fishing_minigames/success/success_state.gd" id="7_psf8l"]
+[ext_resource type="Script" uid="uid://bg2lgea76t3m8" path="res://fishing_minigames/failure/failure_state.gd" id="8_bf2fl"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_h4yvn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h4yvn"]
+albedo_color = Color(0.5788026, 0, 0.29113695, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_k1ehf"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_h4yvn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k1ehf"]
+albedo_color = Color(0.7150053, 0, 0.3054113, 1)
+
+[node name="FishingSystem" type="Node"]
+script = ExtResource("1_h4yvn")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+unique_name_in_owner = true
+script = ExtResource("2_k1ehf")
+initial_state = NodePath("Casting")
+metadata/_custom_type_script = "uid://c3vfowirpsvnq"
+
+[node name="Casting" type="Node" parent="StateMachine" node_paths=PackedStringArray("reeling_state")]
+script = ExtResource("3_bb444")
+reeling_state = NodePath("../Reeling")
+
+[node name="CastingUI" type="Control" parent="StateMachine/Casting"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchor_right = 0.96875
+anchor_bottom = 0.9444444
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="CastDistance" type="ProgressBar" parent="StateMachine/Casting/CastingUI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -168.0
+offset_bottom = -141.0
+grow_horizontal = 2
+grow_vertical = 2
+step = 0.1
+show_percentage = false
+
+[node name="CastAccuracy" type="ProgressBar" parent="StateMachine/Casting/CastingUI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 24.0
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+step = 0.1
+show_percentage = false
+
+[node name="Reeling" type="Node" parent="StateMachine" node_paths=PackedStringArray("casting_state", "hooked_state")]
+script = ExtResource("4_xi2u0")
+casting_state = NodePath("../Casting")
+hooked_state = NodePath("../Hooked")
+metadata/_custom_type_script = "uid://lk6olkx3g1ca"
+
+[node name="BobberTest" type="CharacterBody3D" parent="StateMachine/Reeling"]
+unique_name_in_owner = true
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StateMachine/Reeling/BobberTest"]
+shape = SubResource("CylinderShape3D_h4yvn")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="StateMachine/Reeling/BobberTest"]
+material = SubResource("StandardMaterial3D_h4yvn")
+
+[node name="FishDetector" type="Area3D" parent="StateMachine/Reeling/BobberTest"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StateMachine/Reeling/BobberTest/FishDetector"]
+shape = SubResource("CylinderShape3D_k1ehf")
+
+[node name="BobberTest" type="CSGMesh3D" parent="StateMachine/Reeling/BobberTest/FishDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.9915338)
+mesh = SubResource("CapsuleMesh_h4yvn")
+material = SubResource("StandardMaterial3D_k1ehf")
+
+[node name="Hooked" type="Node" parent="StateMachine" node_paths=PackedStringArray("landing_state", "failure_state")]
+script = ExtResource("5_n2vtn")
+landing_state = NodePath("../Landing")
+failure_state = NodePath("../Failure")
+metadata/_custom_type_script = "uid://lk6olkx3g1ca"
+
+[node name="Landing" type="Node" parent="StateMachine" node_paths=PackedStringArray("success_state", "failure_state")]
+script = ExtResource("6_d7i3u")
+success_state = NodePath("../Success")
+failure_state = NodePath("../Failure")
+metadata/_custom_type_script = "uid://lk6olkx3g1ca"
+
+[node name="Success" type="Node" parent="StateMachine" node_paths=PackedStringArray("casting_state")]
+script = ExtResource("7_psf8l")
+casting_state = NodePath("../Casting")
+metadata/_custom_type_script = "uid://lk6olkx3g1ca"
+
+[node name="Failure" type="Node" parent="StateMachine" node_paths=PackedStringArray("casting_state")]
+script = ExtResource("8_bf2fl")
+casting_state = NodePath("../Casting")
+metadata/_custom_type_script = "uid://lk6olkx3g1ca"
+
+[connection signal="body_entered" from="StateMachine/Reeling/BobberTest/FishDetector" to="StateMachine/Reeling" method="_on_fish_detector_body_entered"]
