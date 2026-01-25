@@ -10,30 +10,31 @@ class_name ReelingState
 
 
 var bobber_speed: float = 500.0
-var detected_fish: Node3D = null
+var detected_fish: TestFish = null
 
 
 func _on_fish_detector_body_entered(fish: CharacterBody3D) -> void:
 	print("fish detected")
-	detected_fish = fish
+	if fish is TestFish:
+		detected_fish = fish
 
 
 func enter(_previous_state: State) -> void:
 	print("reeling state")
 	bobber.position = Vector3.ZERO
+	detected_fish = null
 
 	bobber.visible = true
 
 
 func exit() -> void:
 	bobber.visible = false
-	detected_fish = null
 
 
 func physics_update(delta: float) -> State:
 	_move_bobber(delta)
 
-	if detected_fish != null and Input.is_action_just_pressed("action"):
+	if detected_fish != null and Input.is_action_just_pressed("bottom_action"):
 		return hooked_state
 	elif Input.is_action_just_pressed("cancel"):
 		return casting_state

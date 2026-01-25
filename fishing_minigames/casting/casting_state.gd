@@ -66,7 +66,7 @@ func _slide_bar_value(bar: ProgressBar, delta: float) -> void:
 
 
 func _capture_bar_value(bar: ProgressBar):
-	if Input.is_action_just_pressed("right"):
+	if Input.is_action_just_pressed("bottom_action"):
 		if bar == cast_distance_bar:
 			cast_dist = bar.value
 			cast_dist_active = false

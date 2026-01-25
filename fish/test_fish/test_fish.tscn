@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cakbfjw703agb"]
+
+[ext_resource type="Script" uid="uid://ciov2fosm25kv" path="res://fish/test_fish/test_fish.gd" id="1_3puks"]
+[ext_resource type="Script" uid="uid://b5ikj8rk84yj0" path="res://fish/fish_resource.gd" id="2_3l7mb"]
+
+[sub_resource type="Resource" id="Resource_8iq2n"]
+resource_local_to_scene = true
+script = ExtResource("2_3l7mb")
+hooking_sequence = Array[int]([0, 1])
+landing_sequence = Array[int]([4, 7])
+metadata/_custom_type_script = "uid://b5ikj8rk84yj0"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tta6g"]
+
+[node name="TestFish" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_3puks")
+fish_data = SubResource("Resource_8iq2n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_tta6g")
+debug_color = Color(3.3691526e-07, 0.6369832, 0.40198871, 0.41960785)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
