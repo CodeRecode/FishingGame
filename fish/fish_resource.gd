@@ -20,3 +20,6 @@ enum Inputs {
 
 @export var hooking_sequence: Array[Inputs]
 @export var landing_sequence: Array[Inputs]
+
+@export var input_window_seconds: float
+@export var nibbles_before_flee: int

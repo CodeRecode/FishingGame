@@ -8,7 +8,6 @@ const BAR_SLIDE_SPEED: float = 100.0
 @export var reeling_state: State
 
 
-@onready var casting_ui: Control = %CastingUI
 @onready var cast_distance_bar: ProgressBar = %CastDistance
 @onready var cast_accuracy_bar: ProgressBar = %CastAccuracy
 
@@ -23,7 +22,8 @@ var cast_acc: float = 0.0
 
 func enter(_previous_state: State) -> void:
 	print("casting state")
-	casting_ui.visible = true
+	cast_distance_bar.visible = true
+	cast_accuracy_bar.visible = true
 
 	bar_direction = 1
 	cast_dist_active = true
@@ -34,7 +34,8 @@ func enter(_previous_state: State) -> void:
 
 
 func exit() -> void:
-	casting_ui.visible = false
+	cast_distance_bar.visible = false
+	cast_accuracy_bar.visible = false
 
 	cast_dist_active = false
 	cast_acc_active = false
