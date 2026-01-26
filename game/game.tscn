@@ -1,0 +1,144 @@
+[gd_scene load_steps=13 format=3 uid="uid://b100l8rqeryq6"]
+
+[ext_resource type="Script" uid="uid://b5rqbsti117px" path="res://game/game.gd" id="1_l1rk1"]
+[ext_resource type="Script" uid="uid://c6pt85if43w4h" path="res://game/intro_manager/intro_manager.gd" id="2_vasa2"]
+[ext_resource type="Script" uid="uid://djk2tm3uf7hua" path="res://game/debug/debug_current_state_label.gd" id="3_h7iqs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l1rk1"]
+albedo_color = Color(0, 0.30980393, 0, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l1rk1"]
+
+[sub_resource type="Sky" id="Sky_l1rk1"]
+sky_material = SubResource("ProceduralSkyMaterial_l1rk1")
+
+[sub_resource type="Environment" id="Environment_l1rk1"]
+background_mode = 2
+sky = SubResource("Sky_l1rk1")
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_vasa2"]
+
+[sub_resource type="Compositor" id="Compositor_h7iqs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vasa2"]
+
+[sub_resource type="Curve3D" id="Curve3D_vasa2"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.1635971, 44.087093, 3.2348633, 0, 0, 0, 0, 0, 0, 26.519402, 39.61508, 4.42749, 0, 0, 0, 0, 0, 0, 44.258377, 30.969196, 19.781372, 0, 0, 0, 0, 0, 0, 57.674393, 20.534506, 42.73767, 0, 0, 0, 0, 0, 0, 46.941574, 11.143286, 69.86792, 0, 0, 0, 0, 0, 0, 26.370338, 8.60915, 88.94849, 0, 0, 0, 0, 0, 0, 1.4761429, 10.696083, 94.762085),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 7
+
+[sub_resource type="LabelSettings" id="LabelSettings_vasa2"]
+font_size = 32
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_l1rk1")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 47.124023)
+size = Vector3(100, 5, 100)
+material = SubResource("StandardMaterial3D_l1rk1")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_l1rk1")
+camera_attributes = SubResource("CameraAttributesPractical_vasa2")
+compositor = SubResource("Compositor_h7iqs")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 194.30817, 66.16925, 41.054993)
+
+[node name="IntroManager" type="Node" parent="." node_paths=PackedStringArray("game", "camera", "camera_look_target", "camera_follow_path")]
+script = ExtResource("2_vasa2")
+game = NodePath("..")
+camera = NodePath("../Camera3D")
+camera_look_target = NodePath("../CSGBox3D2")
+camera_follow_path = NodePath("../Path3D/PathFollow3D")
+duration = 3.0
+metadata/_custom_type_script = "uid://c6pt85if43w4h"
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3891373, 8.369263, 47.850502)
+size = Vector3(10, 10, 10)
+material = SubResource("StandardMaterial3D_vasa2")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_vasa2")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(-0.04465032, 0.16496535, -0.9852696, -2.2351163e-08, 0.98625976, 0.16512896, 0.9989765, 0.007373324, -0.04403767, -0.1635971, 44.087093, 3.2348633)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DEBUG_NextState" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -245.0
+offset_top = -121.0
+offset_right = -50.0
+offset_bottom = -50.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="Control/DEBUG_NextState"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "NEXT STATE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DEBUG_PrevState" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -121.0
+offset_right = 245.0
+offset_bottom = -50.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="Control/DEBUG_PrevState"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PREV STATE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DEBUG_CurrentStateLabel" type="Label" parent="Control" node_paths=PackedStringArray("game", "label")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -62.0
+offset_right = 62.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "CURRENT STATE: %s"
+label_settings = SubResource("LabelSettings_vasa2")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_h7iqs")
+game = NodePath("../..")
+label = NodePath(".")
+
+[connection signal="pressed" from="Control/DEBUG_NextState" to="." method="set_next_state"]
+[connection signal="pressed" from="Control/DEBUG_PrevState" to="." method="set_prev_state"]
