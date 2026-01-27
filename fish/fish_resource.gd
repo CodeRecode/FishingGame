@@ -1,6 +1,9 @@
+@tool
 extends Resource
 class_name FishResource
 
+@export var id: int = 0
+@export var display_name: String = ""
 
 enum Inputs {
 	UP,

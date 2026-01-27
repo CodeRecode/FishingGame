@@ -6,8 +6,11 @@
 [sub_resource type="Resource" id="Resource_8iq2n"]
 resource_local_to_scene = true
 script = ExtResource("2_3l7mb")
+uid = null
 hooking_sequence = Array[int]([0, 1])
 landing_sequence = Array[int]([4, 7])
+input_window_seconds = null
+nibbles_before_flee = null
 metadata/_custom_type_script = "uid://b5ikj8rk84yj0"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tta6g"]
