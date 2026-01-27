@@ -15,6 +15,7 @@ func _on_catch(catch: FishResource):
 
 func _on_ready() -> void:
 	reward_ui.visible = false
+	game.on_catch.connect(_on_catch)
 
 
 func _on_activate() -> void:

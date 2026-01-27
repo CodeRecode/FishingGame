@@ -35,4 +35,4 @@ func _update_intro(delta: float) -> void:
 		camera.look_at(camera_look_target.global_position, Vector3.UP)
 		
 	if _current_progress >= 1.0:
-		game.current_state = Game.State.IDLE
+		game.go_to_idle()

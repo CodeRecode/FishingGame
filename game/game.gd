@@ -7,10 +7,13 @@ enum State {
 	IDLE,
 	FISHING,
 	REWARD,
+	FAIL,
 }
 
 signal state_enter(state: Game.State)
 signal state_exit(state: Game.State)
+
+signal on_catch(catch:FishResource)
 
 var _current_state: Game.State = Game.State.UNKNOWN
 
@@ -24,6 +27,16 @@ var current_state: Game.State:
 
 func _ready() -> void:
 	current_state = Game.State.INTRO
+
+
+func catch(fish:FishResource) -> void:
+	on_catch.emit(fish)
+
+func go_to_idle() -> void:
+	current_state = Game.State.IDLE
+	
+func go_to_fishing() -> void:
+	current_state = Game.State.FISHING
 
 func set_prev_state() -> void:
 	var state_count := Game.State.size()
