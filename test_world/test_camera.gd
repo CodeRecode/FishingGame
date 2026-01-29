@@ -38,3 +38,7 @@ func _process(delta: float) -> void:
 		randf_range(-1.0, 1.0) * max_rotation_offset * shake,
 		0.0
 	)
+
+
+func _on_set_fishing_game_active(value: bool) -> void:
+	current = value

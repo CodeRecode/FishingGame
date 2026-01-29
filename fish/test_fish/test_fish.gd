@@ -6,6 +6,9 @@ class_name TestFish
 
 
 func check_player_input(current_input_index: int, input_sequence: Array[FishResource.Inputs]) -> int:
+	if current_input_index >= input_sequence.size():
+		return current_input_index + 1
+
 	if input_sequence[current_input_index] == fish_data.Inputs.UP:
 		print("Press up!")
 		if Input.is_action_just_pressed("up"):

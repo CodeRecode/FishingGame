@@ -31,10 +31,10 @@ func _on_settings_close_button_pressed() -> void:
 
 func _on_credits_button_pressed() -> void:
 	credits_menu.show()
-	
+
 func _on_credits_close_button_pressed() -> void:
 	credits_menu.hide()
-	
+
 func _on_music_slider_value_changed(value: float) -> void:
 	var bus_idx = AudioServer.get_bus_index("Music")
 	AudioServer.set_bus_volume_linear(bus_idx, value / 100.)

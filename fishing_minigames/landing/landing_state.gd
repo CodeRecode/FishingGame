@@ -5,7 +5,7 @@ class_name LandingState
 signal add_camera_shake(impact: float)
 
 
-@export var success_state: State
+@export var success_state: SuccessState
 @export var failure_state: State
 
 
@@ -67,7 +67,8 @@ func physics_update(delta: float) -> State:
 			timer = 0.0
 			add_camera_shake.emit(0.7)
 
-	elif current_input_index >= hooked_fish.fish_data.hooking_sequence.size():
+	if current_input_index >= hooked_fish.fish_data.hooking_sequence.size():
+		success_state.fish_caught = hooked_fish
 		return success_state
 
 	return null

@@ -10,11 +10,17 @@ signal add_camera_shake(impact: float)
 
 
 var current_state: State = null
+var run_fishing_games: bool = false
 
 
 func _ready() -> void:
-	state_machine.initialize()
 	state_machine.current_state_changed.connect(_on_current_state_changed)
+
+
+func _on_set_fishing_game_active(value: bool) -> void:
+	if value == true:
+		state_machine.initialize()
+	run_fishing_games = value
 
 
 func _on_current_state_changed(new_state: State) -> void:
@@ -27,8 +33,10 @@ func _on_add_camera_shake(amount: float) -> void:
 
 
 func _process(delta: float) -> void:
-	state_machine.frame_update(delta)
+	if run_fishing_games:
+		state_machine.frame_update(delta)
 
 
 func _physics_process(delta: float) -> void:
-	state_machine.physics_update(delta)
+	if run_fishing_games:
+		state_machine.physics_update(delta)
