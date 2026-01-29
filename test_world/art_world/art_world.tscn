@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://p08kc82b12gs"]
+
+[ext_resource type="PackedScene" uid="uid://caiuob5rvtlao" path="res://art/env/environment.glb" id="1_uym4u"]
+[ext_resource type="PackedScene" uid="uid://ddxx6114pt3by" path="res://art/char/fisher.glb" id="2_rflia"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uym4u"]
+transparency = 1
+albedo_color = Color(0.13725491, 0.38431373, 1, 0.60784316)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_uym4u"]
+size = Vector2(150, 150)
+
+[node name="ArtWorld" type="Node3D"]
+
+[node name="environment" parent="." instance=ExtResource("1_uym4u")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.6291561, -57.03474)
+material_override = SubResource("StandardMaterial3D_uym4u")
+mesh = SubResource("PlaneMesh_uym4u")
+skeleton = NodePath("../environment")
+
+[node name="fisher" parent="." instance=ExtResource("2_rflia")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.08952427, 0, -0.45132804)
