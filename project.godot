@@ -33,6 +33,10 @@ project/assembly_name="Fishing Game"
 
 enabled=PackedStringArray("res://addons/proton_scatter/plugin.cfg")
 
+[filesystem]
+
+import/blender/enabled=false
+
 [gui]
 
 theme/custom="uid://dxj1nu0srofui"

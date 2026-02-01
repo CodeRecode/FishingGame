@@ -124,7 +124,7 @@ material = SubResource("StandardMaterial3D_vasa2")
 curve = SubResource("Curve3D_vasa2")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(-0.04465032, 0.16496536, -0.9852699, -2.2351163e-08, 0.98625976, 0.16512904, 0.9989765, 0.0073733246, -0.044037685, -0.1635971, 44.087093, 3.2348633)
+transform = Transform3D(-0.04465032, 0.16496535, -0.9852699, -2.2351163e-08, 0.98625976, 0.16512902, 0.9989765, 0.007373324, -0.044037685, -0.1635971, 44.087093, 3.2348633)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
