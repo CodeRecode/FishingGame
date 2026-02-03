@@ -1,6 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://b100l8rqeryq6"]
+[gd_scene load_steps=24 format=3 uid="uid://b100l8rqeryq6"]
 
 [ext_resource type="Script" uid="uid://b5rqbsti117px" path="res://game/game.gd" id="1_l1rk1"]
+[ext_resource type="PackedScene" uid="uid://p08kc82b12gs" path="res://test_world/art_world/art_world.tscn" id="2_3vho3"]
 [ext_resource type="Script" uid="uid://c6pt85if43w4h" path="res://game/managers/intro_manager.gd" id="2_vasa2"]
 [ext_resource type="Script" uid="uid://b3n1fa444uc4e" path="res://test_world/test_camera.gd" id="2_y36n6"]
 [ext_resource type="Script" uid="uid://dixi11gvyp0fs" path="res://game/managers/reward_manager.gd" id="3_4fuuu"]
@@ -27,7 +28,7 @@ sky = SubResource("Sky_l1rk1")
 
 [sub_resource type="Compositor" id="Compositor_h7iqs"]
 
-[sub_resource type="Resource" id="Resource_j8tme"]
+[sub_resource type="Resource" id="Resource_3vho3"]
 resource_local_to_scene = true
 script = ExtResource("10_3vho3")
 display_name = "Test Fish"
@@ -60,6 +61,7 @@ script = ExtResource("1_l1rk1")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 47.124023)
+visible = false
 size = Vector3(100, 5, 100)
 material = SubResource("StandardMaterial3D_l1rk1")
 
@@ -67,6 +69,8 @@ material = SubResource("StandardMaterial3D_l1rk1")
 environment = SubResource("Environment_l1rk1")
 camera_attributes = SubResource("CameraAttributesPractical_vasa2")
 compositor = SubResource("Compositor_h7iqs")
+
+[node name="ArtWorld" parent="." instance=ExtResource("2_3vho3")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 194.30817, 66.16925, 41.054993)
@@ -113,7 +117,7 @@ metadata/_custom_type_script = "uid://bcc7tfs1jooxq"
 
 [node name="TestFish" parent="." instance=ExtResource("9_j8tme")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -38)
-fish_data = SubResource("Resource_j8tme")
+fish_data = SubResource("Resource_3vho3")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3891373, 8.369263, 47.850502)
@@ -124,7 +128,7 @@ material = SubResource("StandardMaterial3D_vasa2")
 curve = SubResource("Curve3D_vasa2")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(-0.04465032, 0.16496535, -0.9852699, -2.2351163e-08, 0.98625976, 0.16512902, 0.9989765, 0.007373324, -0.044037685, -0.1635971, 44.087093, 3.2348633)
+transform = Transform3D(-0.04465032, 0.16496536, -0.9852699, -2.2351163e-08, 0.98625976, 0.16512904, 0.9989765, 0.0073733246, -0.044037685, -0.1635971, 44.087093, 3.2348633)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

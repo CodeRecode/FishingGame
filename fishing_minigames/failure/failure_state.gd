@@ -4,6 +4,11 @@ class_name FailureState
 
 @export var casting_state: State
 
+@onready var controls: ColorRect = %Controls
+
+
+func enter(_previous_state: State) -> void:
+	controls.visible = false
 
 func physics_update(_delta: float) -> State:
 	#if Input.is_action_just_pressed("bottom_action"):

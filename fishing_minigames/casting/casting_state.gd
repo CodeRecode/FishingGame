@@ -8,6 +8,7 @@ const BAR_SLIDE_SPEED: float = 100.0
 @export var reeling_state: State
 
 
+@onready var controls: ColorRect = %Controls
 @onready var cast_distance_bar: ProgressBar = %CastDistance
 @onready var cast_accuracy_bar: ProgressBar = %CastAccuracy
 
@@ -21,7 +22,7 @@ var cast_acc: float = 0.0
 
 
 func enter(_previous_state: State) -> void:
-	print("casting state")
+	controls.visible = true
 	cast_distance_bar.visible = true
 	cast_accuracy_bar.visible = true
 
