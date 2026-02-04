@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://b100l8rqeryq6"]
+[gd_scene load_steps=27 format=3 uid="uid://b100l8rqeryq6"]
 
 [ext_resource type="Script" uid="uid://b5rqbsti117px" path="res://game/game.gd" id="1_l1rk1"]
 [ext_resource type="PackedScene" uid="uid://p08kc82b12gs" path="res://test_world/art_world/art_world.tscn" id="2_3vho3"]
+[ext_resource type="Shader" uid="uid://cflx72uinj5db" path="res://test_world/art_world/sky_shader.gdshader" id="2_j8tme"]
 [ext_resource type="Script" uid="uid://c6pt85if43w4h" path="res://game/managers/intro_manager.gd" id="2_vasa2"]
 [ext_resource type="Script" uid="uid://b3n1fa444uc4e" path="res://test_world/test_camera.gd" id="2_y36n6"]
 [ext_resource type="Script" uid="uid://dixi11gvyp0fs" path="res://game/managers/reward_manager.gd" id="3_4fuuu"]
@@ -13,10 +14,43 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l1rk1"]
 albedo_color = Color(0, 0.30980393, 0, 1)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l1rk1"]
+[sub_resource type="Gradient" id="Gradient_3vho3"]
+offsets = PackedFloat32Array(0.27070063, 0.4044586)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qf6n1"]
+frequency = 0.0029
+fractal_type = 2
+domain_warp_enabled = true
+domain_warp_frequency = 0.001
+domain_warp_fractal_lacunarity = 11.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vsp63"]
+width = 2048
+height = 2048
+noise = SubResource("FastNoiseLite_qf6n1")
+color_ramp = SubResource("Gradient_3vho3")
+seamless = true
+in_3d_space = true
+
+[sub_resource type="Gradient" id="Gradient_j8tme"]
+colors = PackedColorArray(0.55368763, 0.6849134, 0.9540455, 1, 0.050000012, 0.33499998, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3vho3"]
+gradient = SubResource("Gradient_j8tme")
+fill_from = Vector2(0.45726496, 1)
+fill_to = Vector2(0.46581197, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3vho3"]
+shader = ExtResource("2_j8tme")
+shader_parameter/hdri_strength = 0.80000001192096
+shader_parameter/hill_color = Color(0.5294118, 0.69803923, 0.45882353, 1)
+shader_parameter/sky_tex = SubResource("GradientTexture2D_3vho3")
+shader_parameter/cloud_tex = SubResource("NoiseTexture2D_vsp63")
 
 [sub_resource type="Sky" id="Sky_l1rk1"]
-sky_material = SubResource("ProceduralSkyMaterial_l1rk1")
+sky_material = SubResource("ShaderMaterial_3vho3")
+radiance_size = 0
 
 [sub_resource type="Environment" id="Environment_l1rk1"]
 background_mode = 2
@@ -112,7 +146,7 @@ material = SubResource("StandardMaterial3D_vasa2")
 curve = SubResource("Curve3D_vasa2")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(-0.04465032, 0.16496536, -0.9852699, -2.2351163e-08, 0.98625976, 0.16512904, 0.9989765, 0.0073733246, -0.044037685, -0.1635971, 44.087093, 3.2348633)
+transform = Transform3D(-0.04465032, 0.16496535, -0.9852699, -2.2351163e-08, 0.98625976, 0.16512902, 0.9989765, 0.007373324, -0.044037685, -0.1635971, 44.087093, 3.2348633)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
