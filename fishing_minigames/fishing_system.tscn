@@ -1,8 +1,9 @@
-[gd_scene load_steps=31 format=3 uid="uid://bxf3h3pu0htoa"]
+[gd_scene load_steps=33 format=3 uid="uid://bxf3h3pu0htoa"]
 
 [ext_resource type="Script" uid="uid://b3xar2qf4p0lq" path="res://fishing_minigames/fishing_system.gd" id="1_h4yvn"]
+[ext_resource type="PackedScene" uid="uid://cakbfjw703agb" path="res://fish/test_fish/test_fish.tscn" id="2_bf2fl"]
 [ext_resource type="Script" uid="uid://c3vfowirpsvnq" path="res://fishing_minigames/state_machine/state_machine.gd" id="2_k1ehf"]
-[ext_resource type="PackedScene" uid="uid://p08kc82b12gs" path="res://test_world/art_world/art_world.tscn" id="2_xi2u0"]
+[ext_resource type="Script" uid="uid://ch743swetxf8n" path="res://fishing_minigames/pond_limits.gd" id="2_psf8l"]
 [ext_resource type="Script" uid="uid://bicm5muuxnb17" path="res://fishing_minigames/casting/casting_state.gd" id="3_bb444"]
 [ext_resource type="Script" uid="uid://hnxhfijc1jlc" path="res://fishing_minigames/reeling/reeling_state.gd" id="4_xi2u0"]
 [ext_resource type="Script" uid="uid://dih6brdi1cxgx" path="res://fishing_minigames/hooked/hooked_state.gd" id="5_n2vtn"]
@@ -14,6 +15,10 @@
 [ext_resource type="Texture2D" uid="uid://82ubs1thq5iq" path="res://ui/ui_input_prompts/playdate_sheet_default.png" id="12_n2vtn"]
 [ext_resource type="Texture2D" uid="uid://dg5wk3qayeij6" path="res://ui/ui_input_prompts/keyboard-&-mouse_sheet_default.png" id="13_d7i3u"]
 [ext_resource type="Script" uid="uid://bqub03ns3ycxw" path="res://fishing_minigames/input_type_listener.gd" id="14_psf8l"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_psf8l"]
+height = 10.0
+radius = 55.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n2vtn"]
 atlas = ExtResource("10_xi2u0")
@@ -102,8 +107,17 @@ _data = {
 
 [node name="FishingSystem" type="Node"]
 script = ExtResource("1_h4yvn")
+test_fish_array = Array[PackedScene]([ExtResource("2_bf2fl"), ExtResource("2_bf2fl"), ExtResource("2_bf2fl"), ExtResource("2_bf2fl")])
 
-[node name="ArtWorld" parent="." instance=ExtResource("2_xi2u0")]
+[node name="PondLimits" type="Area3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -60)
+script = ExtResource("2_psf8l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PondLimits"]
+unique_name_in_owner = true
+shape = SubResource("CylinderShape3D_psf8l")
+debug_color = Color(0.9529412, 0, 0.5529412, 1)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 unique_name_in_owner = true
@@ -314,7 +328,7 @@ texture_normal = SubResource("AtlasTexture_cv827")
 
 [node name="BobberTest" type="CharacterBody3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -11)
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BobberTest"]

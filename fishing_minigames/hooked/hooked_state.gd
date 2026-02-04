@@ -24,7 +24,6 @@ func _ready() -> void:
 
 
 func enter(_previous_state: State) -> void:
-	print("hooked state")
 	add_camera_shake.emit(1.4)
 
 	if _previous_state is ReelingState:

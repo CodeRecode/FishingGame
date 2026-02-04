@@ -6,7 +6,11 @@ signal state_changed(new_state: State)
 signal add_camera_shake(impact: float)
 
 
+@export var test_fish_array: Array[PackedScene]
+
+
 @onready var state_machine: StateMachine = %StateMachine
+@onready var pond_limits: FishSpawner = %PondLimits
 
 
 var current_state: State = null
@@ -20,6 +24,10 @@ func _ready() -> void:
 func _on_set_fishing_game_active(value: bool) -> void:
 	if value == true:
 		state_machine.initialize()
+		pond_limits.spawn_fish(test_fish_array)
+	elif value == false:
+		pond_limits.remove_all_fish()
+
 	run_fishing_games = value
 
 

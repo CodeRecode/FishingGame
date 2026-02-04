@@ -44,7 +44,7 @@ const DKEY: Rect2 = Rect2(
 			)
 
 const ABUTTON: Rect2 = Rect2(
-				Vector2(256,0),
+				Vector2(0,256),
 				Vector2(64,64)
 			)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b100l8rqeryq6"]
+[gd_scene load_steps=21 format=3 uid="uid://b100l8rqeryq6"]
 
 [ext_resource type="Script" uid="uid://b5rqbsti117px" path="res://game/game.gd" id="1_l1rk1"]
 [ext_resource type="PackedScene" uid="uid://p08kc82b12gs" path="res://test_world/art_world/art_world.tscn" id="2_3vho3"]
@@ -9,8 +9,6 @@
 [ext_resource type="Script" uid="uid://ca8ub70hsj3jb" path="res://game/managers/fishing_manager.gd" id="4_u5opy"]
 [ext_resource type="Script" uid="uid://bcc7tfs1jooxq" path="res://game/managers/fail_manager.gd" id="6_y36n6"]
 [ext_resource type="PackedScene" uid="uid://bxf3h3pu0htoa" path="res://fishing_minigames/fishing_system.tscn" id="7_u5opy"]
-[ext_resource type="PackedScene" uid="uid://cakbfjw703agb" path="res://fish/test_fish/test_fish.tscn" id="9_j8tme"]
-[ext_resource type="Script" uid="uid://b5ikj8rk84yj0" path="res://fish/fish_resource.gd" id="10_3vho3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l1rk1"]
 albedo_color = Color(0, 0.30980393, 0, 1)
@@ -27,16 +25,6 @@ sky = SubResource("Sky_l1rk1")
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_vasa2"]
 
 [sub_resource type="Compositor" id="Compositor_h7iqs"]
-
-[sub_resource type="Resource" id="Resource_3vho3"]
-resource_local_to_scene = true
-script = ExtResource("10_3vho3")
-display_name = "Test Fish"
-hooking_sequence = Array[int]([0, 1])
-landing_sequence = Array[int]([2])
-input_window_seconds = 1.0
-nibbles_before_flee = 3
-metadata/_custom_type_script = "uid://b5ikj8rk84yj0"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vasa2"]
 
@@ -114,10 +102,6 @@ game = NodePath("..")
 metadata/_custom_type_script = "uid://bcc7tfs1jooxq"
 
 [node name="FishingSystem" parent="." instance=ExtResource("7_u5opy")]
-
-[node name="TestFish" parent="." instance=ExtResource("9_j8tme")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -38)
-fish_data = SubResource("Resource_3vho3")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3891373, 8.369263, 47.850502)

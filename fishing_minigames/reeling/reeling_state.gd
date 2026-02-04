@@ -9,11 +9,13 @@ signal add_camera_shake(impact: float)
 @export var hooked_state: State
 
 
+@onready var pond_limits: Area3D = %PondLimits
+@onready var pond_collider: CollisionShape3D = %CollisionShape3D
 @onready var bobber: CharacterBody3D = %BobberTest
 @onready var bobber_anim_player: AnimationPlayer = %AnimationPlayer
 
 
-var bobber_speed: float = 500.0
+var bobber_speed: float = 1000.0
 var detected_fish: TestFish = null
 var nibble_count: int = 0
 var timer: float = 0.0
@@ -24,20 +26,16 @@ func _ready() -> void:
 
 
 func _on_fish_detector_body_entered(fish: CharacterBody3D) -> void:
-	print("fish detected")
 	if fish is TestFish:
 		detected_fish = fish
 
 
 func _on_fish_detector_body_exited(fish: Node3D) -> void:
-	print("fish fled")
 	if fish is TestFish:
 		detected_fish = null
 
 
 func enter(_previous_state: State) -> void:
-	print("reeling state")
-	bobber.position = Vector3.ZERO
 	detected_fish = null
 	timer = 0.0
 	nibble_count = 0
@@ -69,6 +67,20 @@ func _move_bobber(delta: float) -> void:
 
 	bobber.velocity = Vector3(input_x, 0.0, input_z) * bobber_speed * delta
 	bobber.move_and_slide()
+	_keep_bobber_in_pond()
+
+
+func _keep_bobber_in_pond() -> void:
+	var offset: Vector3 = pond_limits.transform.origin - bobber.transform.origin
+	offset.y = 0.0
+
+	if offset.length() > pond_collider.shape.radius:
+		offset = offset.normalized() * pond_collider.shape.radius * -1
+		bobber.global_position = Vector3(
+			pond_limits.transform.origin.x + offset.x,
+			bobber.global_position.y,
+			pond_limits.transform.origin.z + offset.z
+		)
 
 
 func _nibble(delta: float) -> void:

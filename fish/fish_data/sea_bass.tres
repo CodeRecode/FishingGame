@@ -5,4 +5,8 @@
 [resource]
 script = ExtResource("1_5h7kc")
 display_name = "Sea Bass"
+hooking_sequence = Array[int]([0, 1, 2])
+landing_sequence = Array[int]([4])
+input_window_seconds = 1.5
+nibbles_before_flee = 3
 metadata/_custom_type_script = "uid://b5ikj8rk84yj0"

@@ -10,6 +10,7 @@ signal add_camera_shake(impact: float)
 
 
 @onready var countdown_prompt: CountdownPrompt = %CountdownPrompt
+@onready var bobber: CharacterBody3D = %BobberTest
 
 
 var camera: Camera3D
@@ -24,7 +25,6 @@ func _ready() -> void:
 
 
 func enter(_previous_state: State) -> void:
-	print("landing state")
 	add_camera_shake.emit(1.3)
 
 	if _previous_state is HookedState:
@@ -39,6 +39,8 @@ func enter(_previous_state: State) -> void:
 
 func exit() -> void:
 	countdown_prompt.set_visibility(false)
+	bobber.visible = false
+	bobber.global_position = Vector3(0,0,-11)
 
 
 func frame_update(_delta: float) -> State:
