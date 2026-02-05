@@ -1,6 +1,11 @@
 class_name FishingManager
 extends BaseManager
 
+@export var camera: Camera3D
+@export var camera_pos: Node3D
+@export var camera_look_target: Node3D
+@export var cam_speed: float = 5.0
+
 signal set_fishing_game_active(value: bool)
 
 var debug_force_success: bool = true
@@ -8,16 +13,8 @@ var debug_force_success: bool = true
 func _init() -> void:
 	_state_to_activate = Game.State.FISHING
 
-# TEMP: Delay then proceed to rewards
 func _on_activate() -> void:
 	set_fishing_game_active.emit(true)
-
-	#await get_tree().create_timer(1.0).timeout
-	#if debug_force_success:
-		#succeed_catch()
-	#else:
-		#fail_catch()
-	#debug_force_success = !debug_force_success
 
 func succeed_catch() -> void:
 	game.catch(load("res://fish/fish_data/sea_bass.tres")) # TEMP: All fish are sea bass
@@ -34,3 +31,18 @@ func _on_fishing_system_state_changed(new_state: State) -> void:
 		game.catch(new_state.fish_caught.fish_data) # TEMP: All fish are sea bass
 		set_fishing_game_active.emit(false)
 		game.current_state = Game.State.REWARD
+		
+		
+func _process(delta: float) -> void:
+	if !camera:
+		return
+
+	# slide to settle in camera pos
+	if camera_pos:
+		camera.global_position = camera.global_position.lerp(
+			camera_pos.global_position,
+			cam_speed * delta
+		)
+	
+	if camera_look_target:
+		camera.look_at(camera_look_target.global_position, Vector3.UP)

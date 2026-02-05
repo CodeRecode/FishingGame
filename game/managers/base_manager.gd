@@ -25,6 +25,7 @@ func _on_deactivate() -> void:
 
 
 func _ready() -> void:
+	set_process(false)
 	if not game:
 		printerr("%s: No game connected. Will never activate.", get_class())
 		return
@@ -40,10 +41,12 @@ func _ready() -> void:
 func _game_state_enter(state: Game.State):
 	if _is_state_to_activate(state):
 		_is_active = true
+		set_process(true)
 		_on_activate()
 
 
 func _game_state_exit(state: Game.State):
 	if _is_state_to_activate(state):
 		_on_deactivate()
+		set_process(false)
 		_is_active = false

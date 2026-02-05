@@ -1,12 +1,12 @@
-[gd_scene load_steps=27 format=3 uid="uid://b100l8rqeryq6"]
+[gd_scene load_steps=26 format=3 uid="uid://b100l8rqeryq6"]
 
 [ext_resource type="Script" uid="uid://b5rqbsti117px" path="res://game/game.gd" id="1_l1rk1"]
 [ext_resource type="PackedScene" uid="uid://p08kc82b12gs" path="res://test_world/art_world/art_world.tscn" id="2_3vho3"]
 [ext_resource type="Shader" uid="uid://cflx72uinj5db" path="res://test_world/art_world/sky_shader.gdshader" id="2_j8tme"]
 [ext_resource type="Script" uid="uid://c6pt85if43w4h" path="res://game/managers/intro_manager.gd" id="2_vasa2"]
-[ext_resource type="Script" uid="uid://b3n1fa444uc4e" path="res://test_world/test_camera.gd" id="2_y36n6"]
 [ext_resource type="Script" uid="uid://dixi11gvyp0fs" path="res://game/managers/reward_manager.gd" id="3_4fuuu"]
 [ext_resource type="Script" uid="uid://1u1j71l1p2wg" path="res://game/managers/idle_manager.gd" id="3_dxrkv"]
+[ext_resource type="Script" uid="uid://bvccagct11vkd" path="res://game/camera_shaker.gd" id="4_3vho3"]
 [ext_resource type="Script" uid="uid://ca8ub70hsj3jb" path="res://game/managers/fishing_manager.gd" id="4_u5opy"]
 [ext_resource type="Script" uid="uid://bcc7tfs1jooxq" path="res://game/managers/fail_manager.gd" id="6_y36n6"]
 [ext_resource type="PackedScene" uid="uid://bxf3h3pu0htoa" path="res://fishing_minigames/fishing_system.tscn" id="7_u5opy"]
@@ -60,14 +60,12 @@ sky = SubResource("Sky_l1rk1")
 
 [sub_resource type="Compositor" id="Compositor_h7iqs"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vasa2"]
-
 [sub_resource type="Curve3D" id="Curve3D_vasa2"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.1635971, 44.087093, 3.2348633, 0, 0, 0, 0, 0, 0, 26.519402, 39.61508, 4.42749, 0, 0, 0, 0, 0, 0, 44.258377, 30.969196, 19.781372, 0, 0, 0, 0, 0, 0, 57.674393, 20.534506, 42.73767, 0, 0, 0, 0, 0, 0, 46.941574, 11.143286, 69.86792, 0, 0, 0, 0, 0, 0, 26.370338, 8.60915, 88.94849, 0, 0, 0, 0, 0, 0, 1.4761429, 10.696083, 94.762085),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 79.606094, 30.720234, 85.11725, 0, 0, 0, 0, 0, 0, 48.734585, 20.534506, 62.48928, 0, 0, 0, 0, 0, 0, 20.512274, 11.143286, 44.346962, 0, 0, 0, 0, 0, 0, 8.786236, 8.60915, 22.104874, 0, 0, 0, 0, 0, 0, 3.898575, 2.561685, 3.2997723),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
-point_count = 7
+point_count = 5
 
 [sub_resource type="LabelSettings" id="LabelSettings_h7iqs"]
 font_size = 128
@@ -80,6 +78,12 @@ font_size = 32
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_l1rk1")
+
+[node name="FishingCameraPosition" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.9980383, 21.715338, 3.2634115)
+
+[node name="IdleCameraPosition" type="Node3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3.898575, 2.561685, 3.2997723)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 47.124023)
@@ -94,31 +98,36 @@ compositor = SubResource("Compositor_h7iqs")
 
 [node name="ArtWorld" parent="." instance=ExtResource("2_3vho3")]
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="CameraShaker" type="Node3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 194.30817, 66.16925, 41.054993)
-current = true
+script = ExtResource("4_3vho3")
 
-[node name="FishingGameCamera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5591929, 0.82903755, 0, -0.82903755, 0.5591929, 0.338, 64.829, 55.801)
-script = ExtResource("2_y36n6")
+[node name="Camera3D" type="Camera3D" parent="CameraShaker"]
+current = true
 
 [node name="IntroManager" type="Node" parent="." node_paths=PackedStringArray("camera", "camera_look_target", "camera_follow_path", "game")]
 script = ExtResource("2_vasa2")
-camera = NodePath("../Camera3D")
-camera_look_target = NodePath("../CSGBox3D2")
-camera_follow_path = NodePath("../Path3D/PathFollow3D")
+camera = NodePath("../CameraShaker/Camera3D")
+camera_look_target = NodePath("../CameraLookTarget")
+camera_follow_path = NodePath("../IntroPath/PathFollow3D")
 duration = 3.0
 game = NodePath("..")
 metadata/_custom_type_script = "uid://c6pt85if43w4h"
 
-[node name="IdleManager" type="Node" parent="." node_paths=PackedStringArray("idle_ui", "game")]
+[node name="IdleManager" type="Node" parent="." node_paths=PackedStringArray("idle_ui", "camera", "camera_pos", "camera_look_target", "game")]
 script = ExtResource("3_dxrkv")
 idle_ui = NodePath("../Control/IdleUI")
+camera = NodePath("../CameraShaker/Camera3D")
+camera_pos = NodePath("../IdleCameraPosition")
+camera_look_target = NodePath("../CameraLookTarget")
 game = NodePath("..")
 metadata/_custom_type_script = "uid://1u1j71l1p2wg"
 
-[node name="FishingManager" type="Node" parent="." node_paths=PackedStringArray("game")]
+[node name="FishingManager" type="Node" parent="." node_paths=PackedStringArray("camera", "camera_pos", "camera_look_target", "game")]
 script = ExtResource("4_u5opy")
+camera = NodePath("../CameraShaker/Camera3D")
+camera_pos = NodePath("../FishingCameraPosition")
+camera_look_target = NodePath("../CameraLookTarget")
 game = NodePath("..")
 metadata/_custom_type_script = "uid://ca8ub70hsj3jb"
 
@@ -137,16 +146,15 @@ metadata/_custom_type_script = "uid://bcc7tfs1jooxq"
 
 [node name="FishingSystem" parent="." instance=ExtResource("7_u5opy")]
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3891373, 8.369263, 47.850502)
-size = Vector3(10, 10, 10)
-material = SubResource("StandardMaterial3D_vasa2")
+[node name="CameraLookTarget" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -27.150587)
 
-[node name="Path3D" type="Path3D" parent="."]
+[node name="IntroPath" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.6293945e-06, 0)
 curve = SubResource("Curve3D_vasa2")
 
-[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(-0.04465032, 0.16496535, -0.9852699, -2.2351163e-08, 0.98625976, 0.16512902, 0.9989765, 0.007373324, -0.044037685, -0.1635971, 44.087093, 3.2348633)
+[node name="PathFollow3D" type="PathFollow3D" parent="IntroPath"]
+transform = Transform3D(0.59115624, -0.2074082, 0.77940226, -7.450352e-09, 0.96635306, 0.25715554, -0.80651903, -0.15202451, 0.57128036, 79.606094, 30.720234, 85.11725)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -305,9 +313,8 @@ label_settings = SubResource("LabelSettings_dakft")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="set_fishing_game_active" from="FishingManager" to="FishingGameCamera3D" method="_on_set_fishing_game_active"]
 [connection signal="set_fishing_game_active" from="FishingManager" to="FishingSystem" method="_on_set_fishing_game_active"]
-[connection signal="add_camera_shake" from="FishingSystem" to="FishingGameCamera3D" method="_on_add_camera_shake"]
+[connection signal="add_camera_shake" from="FishingSystem" to="CameraShaker" method="_on_fishing_system_add_camera_shake"]
 [connection signal="state_changed" from="FishingSystem" to="FishingManager" method="_on_fishing_system_state_changed"]
 [connection signal="pressed" from="Control/RewardUI/NextButton" to="." method="go_to_idle"]
 [connection signal="pressed" from="Control/FailUI/NextButton" to="." method="go_to_idle"]
