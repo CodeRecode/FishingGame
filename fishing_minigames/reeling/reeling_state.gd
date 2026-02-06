@@ -3,6 +3,7 @@ class_name ReelingState
 
 
 signal add_camera_shake(impact: float)
+signal look_at_bobber(bobber: CharacterBody3D)
 
 
 @export var casting_state: State
@@ -41,6 +42,7 @@ func enter(_previous_state: State) -> void:
 	nibble_count = 0
 
 	bobber.visible = true
+	look_at_bobber.emit(bobber)
 
 
 func exit() -> void:

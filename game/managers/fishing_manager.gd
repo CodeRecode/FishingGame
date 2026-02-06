@@ -9,6 +9,7 @@ extends BaseManager
 signal set_fishing_game_active(value: bool)
 
 var debug_force_success: bool = true
+var _bobber: CharacterBody3D = null
 
 func _init() -> void:
 	_state_to_activate = Game.State.FISHING
@@ -28,11 +29,13 @@ func _on_fishing_system_state_changed(new_state: State) -> void:
 		set_fishing_game_active.emit(false)
 		game.current_state = Game.State.FAIL
 	elif new_state is SuccessState:
-		game.catch(new_state.fish_caught.fish_data) # TEMP: All fish are sea bass
+		game.catch(new_state.fish_caught.fish_data)
 		set_fishing_game_active.emit(false)
 		game.current_state = Game.State.REWARD
-		
-		
+
+func _on_look_at_bobber(bobber: CharacterBody3D) -> void:
+	_bobber = bobber
+
 func _process(delta: float) -> void:
 	if !camera:
 		return
@@ -43,6 +46,12 @@ func _process(delta: float) -> void:
 			camera_pos.global_position,
 			cam_speed * delta
 		)
-	
-	if camera_look_target:
+
+	if camera_look_target and _bobber == null:
 		camera.look_at(camera_look_target.global_position, Vector3.UP)
+	elif camera_look_target and _bobber:
+		var target := camera.global_transform.looking_at((camera_look_target.global_position + _bobber.global_position) / 2, Vector3.UP)
+		camera.global_transform = camera.global_transform.interpolate_with(
+			target,
+			cam_speed * delta
+		)

@@ -4,6 +4,7 @@ class_name FishingSystem
 
 signal state_changed(new_state: State)
 signal add_camera_shake(impact: float)
+signal look_at_bobber(bobber:CharacterBody3D)
 
 
 @export var test_fish_array: Array[PackedScene]
@@ -38,6 +39,10 @@ func _on_current_state_changed(new_state: State) -> void:
 
 func _on_add_camera_shake(amount: float) -> void:
 	add_camera_shake.emit(amount)
+
+
+func _on_look_at_bobber(bobber: CharacterBody3D) -> void:
+	look_at_bobber.emit(bobber)
 
 
 func _process(delta: float) -> void:

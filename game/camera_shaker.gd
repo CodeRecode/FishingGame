@@ -1,6 +1,9 @@
 extends Node3D
 
 
+@export var camera: Camera3D
+
+
 var max_translation_offset = 0.05
 var max_rotation_offset = 0.05
 
@@ -16,6 +19,7 @@ func _on_fishing_system_add_camera_shake(amount: float) -> void:
 
 func _ready() -> void:
 	base_transform = transform
+
 
 func _process(delta: float) -> void:
 	# warn: floating point precision could break here
@@ -33,14 +37,14 @@ func _apply_shake() -> void:
 		randf_range(-1.0, 1.0),
 	) * max_translation_offset * shake
 
-	var rotation = Vector3(
+	var rotation_amount = Vector3(
 		randf_range(-1.0, 1.0),
 		randf_range(-1.0, 1.0),
 		0.0
 	) * max_rotation_offset * shake
-	
+
 	transform = base_transform
 	transform.origin += translation
-	rotate_x(rotation.x)
-	rotate_y(rotation.y)
+	camera.rotate_x(rotation_amount.x)
+	camera.rotate_y(rotation_amount.y)
 	#rotate_z(rotation.z)

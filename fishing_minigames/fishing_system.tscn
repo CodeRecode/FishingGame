@@ -355,8 +355,11 @@ libraries = {
 script = ExtResource("14_psf8l")
 
 [connection signal="add_camera_shake" from="StateMachine/Reeling" to="." method="_on_add_camera_shake"]
+[connection signal="look_at_bobber" from="StateMachine/Reeling" to="." method="_on_look_at_bobber"]
 [connection signal="add_camera_shake" from="StateMachine/Hooked" to="." method="_on_add_camera_shake"]
 [connection signal="add_camera_shake" from="StateMachine/Landing" to="." method="_on_add_camera_shake"]
+[connection signal="look_at_bobber" from="StateMachine/Success" to="." method="_on_look_at_bobber"]
+[connection signal="look_at_bobber" from="StateMachine/Failure" to="." method="_on_look_at_bobber"]
 [connection signal="body_entered" from="BobberTest/FishDetector" to="StateMachine/Reeling" method="_on_fish_detector_body_entered"]
 [connection signal="body_exited" from="BobberTest/FishDetector" to="StateMachine/Reeling" method="_on_fish_detector_body_exited"]
 [connection signal="last_input_was_kbm" from="InputTypeListener" to="CanvasLayer/CountdownPrompt" method="_on_input_type_listener_last_input_was_kbm"]

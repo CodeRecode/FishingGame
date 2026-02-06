@@ -2,6 +2,9 @@ extends State
 class_name SuccessState
 
 
+signal look_at_bobber(bobber: CharacterBody3D)
+
+
 @export var casting_state: State
 
 
@@ -12,6 +15,7 @@ var fish_caught: TestFish = null
 
 
 func enter(_previous_state: State) -> void:
+	look_at_bobber.emit(null)
 	controls.visible = false
 
 

@@ -17,7 +17,7 @@ func _on_activate() -> void:
 
 func _on_deactivate() -> void:
 	idle_ui.visible = false
-	
+
 func _process(delta: float) -> void:
 	if !camera:
 		return
@@ -28,6 +28,6 @@ func _process(delta: float) -> void:
 			camera_pos.global_position,
 			cam_speed * delta
 		)
-	
+
 	if camera_look_target:
 		camera.look_at(camera_look_target.global_position, Vector3.UP)

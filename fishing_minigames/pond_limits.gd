@@ -13,12 +13,13 @@ func spawn_fish(fish_array: Array[PackedScene]) -> void:
 		var instance := fish.instantiate()
 		add_child(instance)
 		instance.global_position = _pick_random_spawn_point()
+		instance.activate_fish(instance.global_position, collision_shape)
 		spawned_fish.append(instance)
 
 
 func _pick_random_spawn_point() -> Vector3:
 	var angle: float = randf() * TAU
-	var dist_from_center: float = sqrt(randf()) * collision_shape.shape.radius
+	var dist_from_center: float = sqrt(randf()) * (collision_shape.shape.radius)
 
 	var pos: Vector3 = Vector3(
 		cos(angle) * dist_from_center,
