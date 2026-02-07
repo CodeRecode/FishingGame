@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://82ubs1thq5iq" path="res://ui/ui_input_prompts/playdate_sheet_default.png" id="12_n2vtn"]
 [ext_resource type="Texture2D" uid="uid://dg5wk3qayeij6" path="res://ui/ui_input_prompts/keyboard-&-mouse_sheet_default.png" id="13_d7i3u"]
 [ext_resource type="Script" uid="uid://bqub03ns3ycxw" path="res://fishing_minigames/input_type_listener.gd" id="14_psf8l"]
-[ext_resource type="Script" uid="uid://cl4f2djgw1dky" path="res://fishing_minigames/casting_indicator.gd" id="15_8p5y1"]
+[ext_resource type="Script" uid="uid://cl4f2djgw1dky" path="res://fishing_minigames/casting/casting_indicator.gd" id="15_8p5y1"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_psf8l"]
 height = 10.0
@@ -355,7 +355,7 @@ libraries = {
 
 [node name="CastingIndicator" type="CharacterBody3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -11)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -60)
 visible = false
 collision_mask = 0
 script = ExtResource("15_8p5y1")

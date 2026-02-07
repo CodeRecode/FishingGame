@@ -6,6 +6,7 @@ class_name CastingIndicator
 @onready var accuracy_indicator: CSGTorus3D = $AccuracyIndicator
 
 
+var start_pos: Vector3 = Vector3.ZERO
 var acc_start_inner_radius: float = 0.0
 var acc_start_outer_radius: float = 0.0
 var acc_inner_max_radius: float = 25.0
@@ -17,6 +18,7 @@ var casting_started: bool = false
 
 
 func _ready() -> void:
+	start_pos = global_position
 	acc_start_inner_radius = accuracy_indicator.inner_radius
 	acc_start_outer_radius = accuracy_indicator.outer_radius
 	accuracy_indicator.visible = false
@@ -27,6 +29,7 @@ func reset() -> void:
 	accuracy_indicator.outer_radius = acc_start_outer_radius
 	accuracy_indicator.visible = false
 	casting_started = false
+	global_position = start_pos
 
 
 func start_casting_test() -> void:
