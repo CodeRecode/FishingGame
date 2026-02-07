@@ -13,6 +13,7 @@ signal look_at_casting_indicator(casting_indicator: CharacterBody3D)
 
 @onready var state_machine: StateMachine = %StateMachine
 @onready var pond_limits: FishSpawner = %PondLimits
+@onready var calm_music_player: AudioStreamPlayer = %CalmMusicPlayer
 
 
 var current_state: State = null
@@ -21,6 +22,7 @@ var run_fishing_games: bool = false
 
 func _ready() -> void:
 	state_machine.current_state_changed.connect(_on_current_state_changed)
+	calm_music_player.play()
 
 
 func _on_set_fishing_game_active(value: bool) -> void:

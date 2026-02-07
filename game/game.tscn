@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b100l8rqeryq6"]
+[gd_scene load_steps=30 format=3 uid="uid://b100l8rqeryq6"]
 
 [ext_resource type="Script" uid="uid://b5rqbsti117px" path="res://game/game.gd" id="1_l1rk1"]
 [ext_resource type="PackedScene" uid="uid://p08kc82b12gs" path="res://test_world/art_world/art_world.tscn" id="2_3vho3"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://ca8ub70hsj3jb" path="res://game/managers/fishing_manager.gd" id="4_u5opy"]
 [ext_resource type="Script" uid="uid://bcc7tfs1jooxq" path="res://game/managers/fail_manager.gd" id="6_y36n6"]
 [ext_resource type="PackedScene" uid="uid://bxf3h3pu0htoa" path="res://fishing_minigames/fishing_system.tscn" id="7_u5opy"]
+[ext_resource type="AudioStream" uid="uid://bjxokd68tht3s" path="res://audio/dream-protocol-lake-fishing-inspirational-acoustic-guitars-115076.ogg" id="8_b686c"]
+[ext_resource type="AudioStream" uid="uid://bruvq5bjctpwn" path="res://audio/256128__jimhancock__tada.ogg" id="9_vsp63"]
 [ext_resource type="PackedScene" uid="uid://o6v0k7lv0im3" path="res://fish/fish_data/seabass.glb" id="11_3vho3"]
 [ext_resource type="Script" path="res://fish/fish_data/fish_spin.gd" id="12_qf6n1"]
 
@@ -136,12 +138,17 @@ camera_look_target = NodePath("../CameraLookTarget")
 game = NodePath("..")
 metadata/_custom_type_script = "uid://ca8ub70hsj3jb"
 
-[node name="RewardManager" type="Node" parent="." node_paths=PackedStringArray("reward_ui", "reward_label", "game")]
+[node name="RewardManager" type="Node" parent="." node_paths=PackedStringArray("reward_ui", "reward_label", "reward_audio", "game")]
 script = ExtResource("3_4fuuu")
 reward_ui = NodePath("../Control/RewardUI")
 reward_label = NodePath("../Control/RewardUI/RewardLabel")
+reward_audio = NodePath("TadaPlayer")
 game = NodePath("..")
 metadata/_custom_type_script = "uid://dixi11gvyp0fs"
+
+[node name="TadaPlayer" type="AudioStreamPlayer" parent="RewardManager"]
+stream = ExtResource("9_vsp63")
+volume_db = -1.0
 
 [node name="FailManager" type="Node" parent="." node_paths=PackedStringArray("fail_ui", "game")]
 script = ExtResource("6_y36n6")
@@ -347,6 +354,12 @@ text = "CAST"
 label_settings = SubResource("LabelSettings_dakft")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="CalmMusicPlayer" type="AudioStreamPlayer" parent="Audio"]
+unique_name_in_owner = true
+stream = ExtResource("8_b686c")
 
 [connection signal="set_fishing_game_active" from="FishingManager" to="FishingSystem" method="_on_set_fishing_game_active"]
 [connection signal="add_camera_shake" from="FishingSystem" to="CameraShaker" method="_on_fishing_system_add_camera_shake"]
