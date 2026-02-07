@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bk0l7iwlcafde"]
+
+[ext_resource type="PackedScene" uid="uid://ddxx6114pt3by" path="res://art/char/fisher.glb" id="1_w5y0b"]
+[ext_resource type="Script" uid="uid://cyudmuyr0pqls" path="res://art/char/fisher.gd" id="2_du4nq"]
+
+[node name="Player" type="Node3D"]
+
+[node name="fisher" parent="." instance=ExtResource("1_w5y0b")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.08952427, 0, -0.45132804)
+script = ExtResource("2_du4nq")
+
+[editable path="fisher"]

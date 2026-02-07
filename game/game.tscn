@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b100l8rqeryq6"]
+[gd_scene load_steps=31 format=3 uid="uid://b100l8rqeryq6"]
 
 [ext_resource type="Script" uid="uid://b5rqbsti117px" path="res://game/game.gd" id="1_l1rk1"]
 [ext_resource type="PackedScene" uid="uid://p08kc82b12gs" path="res://test_world/art_world/art_world.tscn" id="2_3vho3"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://bruvq5bjctpwn" path="res://audio/256128__jimhancock__tada.ogg" id="9_vsp63"]
 [ext_resource type="PackedScene" uid="uid://o6v0k7lv0im3" path="res://fish/fish_data/seabass.glb" id="11_3vho3"]
 [ext_resource type="Script" path="res://fish/fish_data/fish_spin.gd" id="12_qf6n1"]
+[ext_resource type="PackedScene" uid="uid://bk0l7iwlcafde" path="res://game/player.tscn" id="15_hb504"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l1rk1"]
 albedo_color = Color(0, 0.30980393, 0, 1)
@@ -360,6 +361,8 @@ vertical_alignment = 1
 [node name="CalmMusicPlayer" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("8_b686c")
+
+[node name="Player" parent="." instance=ExtResource("15_hb504")]
 
 [connection signal="set_fishing_game_active" from="FishingManager" to="FishingSystem" method="_on_set_fishing_game_active"]
 [connection signal="add_camera_shake" from="FishingSystem" to="CameraShaker" method="_on_fishing_system_add_camera_shake"]

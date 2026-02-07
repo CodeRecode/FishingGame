@@ -1,7 +1,6 @@
-[gd_scene load_steps=31 format=3 uid="uid://p08kc82b12gs"]
+[gd_scene load_steps=30 format=3 uid="uid://p08kc82b12gs"]
 
 [ext_resource type="PackedScene" uid="uid://caiuob5rvtlao" path="res://art/env/environment.glb" id="1_uym4u"]
-[ext_resource type="PackedScene" uid="uid://ddxx6114pt3by" path="res://art/char/fisher.glb" id="2_rflia"]
 [ext_resource type="Script" uid="uid://bdxoqrygmw5pu" path="res://addons/proton_scatter/src/scatter.gd" id="3_r6esl"]
 [ext_resource type="Script" uid="uid://cnb5i2g5xrmdg" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="4_ohmmg"]
 [ext_resource type="Script" uid="uid://b61bo3vej36gf" path="res://addons/proton_scatter/src/modifiers/base_modifier.gd" id="5_svd1g"]
@@ -106,9 +105,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.6291561, -57.03474)
 material_override = SubResource("StandardMaterial3D_uym4u")
 mesh = SubResource("PlaneMesh_uym4u")
 skeleton = NodePath("../environment")
-
-[node name="fisher" parent="." instance=ExtResource("2_rflia")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.08952427, 0, -0.45132804)
 
 [node name="BushScatter" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -49.887356)
