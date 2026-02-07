@@ -21,6 +21,7 @@ var bobber_starting_position: Vector3 = Vector3.ZERO
 var detected_fish: TestFish = null
 var nibble_count: int = 0
 var timer: float = 0.0
+var cancel_reeling: bool = false
 
 
 func _ready() -> void:
@@ -49,9 +50,13 @@ func enter(_previous_state: State) -> void:
 
 func exit() -> void:
 	bobber.visible = false
+	cancel_reeling = false
 
 
 func physics_update(delta: float) -> State:
+	if cancel_reeling:
+		return casting_state
+
 	_move_bobber(delta)
 
 	if detected_fish:
@@ -69,6 +74,8 @@ func physics_update(delta: float) -> State:
 func _move_bobber(delta: float) -> void:
 	var input_x: float = Input.get_axis("left", "right")
 	var input_z: float = Input.get_axis("up", "down")
+
+	input_z = clampf(input_z, 0.0, 1.0)
 
 	bobber.velocity = Vector3(input_x, 0.0, input_z) * bobber_speed * delta
 	bobber.move_and_slide()
@@ -99,3 +106,7 @@ func _nibble(delta: float) -> void:
 		bobber_anim_player.play("bob")
 		add_camera_shake.emit(0.8)
 		timer = 0.0
+
+
+func _on_cancel_reeling_area_body_entered(body: Node3D) -> void:
+	cancel_reeling = true

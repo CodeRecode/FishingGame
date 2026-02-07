@@ -29,7 +29,6 @@ func reset() -> void:
 	accuracy_indicator.outer_radius = acc_start_outer_radius
 	accuracy_indicator.visible = false
 	casting_started = false
-	global_position = start_pos
 
 
 func start_casting_test() -> void:

@@ -19,6 +19,7 @@ const BAR_SLIDE_SPEED: float = 100.0
 #@onready var cast_accuracy_bar: ProgressBar = %CastAccuracy
 
 
+var casting_indicator_start_pos: Vector3 = Vector3.ZERO
 var casting_test_time: float = 0.5
 var casting_time_elapsed: float = 0.0
 
@@ -49,6 +50,7 @@ func exit() -> void:
 	casting_indicator.visible = false
 	casting_indicator.reset()
 	casting_time_elapsed = 0.0
+	casting_indicator_start_pos = casting_indicator.global_position
 	#cast_distance_bar.visible = false
 	#cast_accuracy_bar.visible = false
 
@@ -73,6 +75,7 @@ func physics_update(delta: float) -> State:
 
 			if Input.is_action_just_pressed("bottom_action"):
 				reeling_state.bobber_starting_position = random_point_along_radius(casting_indicator.global_position, casting_indicator.accuracy_indicator.inner_radius)
+				casting_indicator.global_position = casting_indicator_start_pos
 				return reeling_state
 
 	#if cast_dist_active:
