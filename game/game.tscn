@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b5rqbsti117px" path="res://game/game.gd" id="1_l1rk1"]
 [ext_resource type="PackedScene" uid="uid://p08kc82b12gs" path="res://test_world/art_world/art_world.tscn" id="2_3vho3"]
-[ext_resource type="Shader" path="res://test_world/art_world/sky_shader.gdshader" id="2_j8tme"]
+[ext_resource type="Shader" uid="uid://cflx72uinj5db" path="res://test_world/art_world/sky_shader.gdshader" id="2_j8tme"]
 [ext_resource type="Script" uid="uid://c6pt85if43w4h" path="res://game/managers/intro_manager.gd" id="2_vasa2"]
 [ext_resource type="Script" uid="uid://dixi11gvyp0fs" path="res://game/managers/reward_manager.gd" id="3_4fuuu"]
 [ext_resource type="Script" uid="uid://1u1j71l1p2wg" path="res://game/managers/idle_manager.gd" id="3_dxrkv"]
@@ -317,6 +317,7 @@ vertical_alignment = 1
 [connection signal="set_fishing_game_active" from="FishingManager" to="FishingSystem" method="_on_set_fishing_game_active"]
 [connection signal="add_camera_shake" from="FishingSystem" to="CameraShaker" method="_on_fishing_system_add_camera_shake"]
 [connection signal="look_at_bobber" from="FishingSystem" to="FishingManager" method="_on_look_at_bobber"]
+[connection signal="look_at_casting_indicator" from="FishingSystem" to="FishingManager" method="_on_look_at_casting_indicator"]
 [connection signal="state_changed" from="FishingSystem" to="FishingManager" method="_on_fishing_system_state_changed"]
 [connection signal="pressed" from="Control/RewardUI/NextButton" to="." method="go_to_idle"]
 [connection signal="pressed" from="Control/FailUI/NextButton" to="." method="go_to_idle"]

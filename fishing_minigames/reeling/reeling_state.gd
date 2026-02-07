@@ -17,6 +17,7 @@ signal look_at_bobber(bobber: CharacterBody3D)
 
 
 var bobber_speed: float = 1000.0
+var bobber_starting_position: Vector3 = Vector3.ZERO
 var detected_fish: TestFish = null
 var nibble_count: int = 0
 var timer: float = 0.0
@@ -37,6 +38,7 @@ func _on_fish_detector_body_exited(fish: Node3D) -> void:
 
 
 func enter(_previous_state: State) -> void:
+	bobber.global_position = bobber_starting_position
 	detected_fish = null
 	timer = 0.0
 	nibble_count = 0
@@ -54,6 +56,7 @@ func physics_update(delta: float) -> State:
 
 	if detected_fish:
 		_nibble(delta)
+		detected_fish.nibbling_or_hooked = true
 
 	if detected_fish != null and Input.is_action_just_pressed("bottom_action"):
 		return hooked_state

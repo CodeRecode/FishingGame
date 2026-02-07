@@ -12,6 +12,7 @@ var pond_limits: CollisionShape3D
 var spawn_pos: Vector3 = Vector3.ZERO
 var target_pos: Vector3 = Vector3.ZERO
 var moving: bool = false
+var nibbling_or_hooked: bool = false
 var backup_timer: float = 0.0
 
 
@@ -23,6 +24,9 @@ func activate_fish(start_pos: Vector3, pond: CollisionShape3D) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if nibbling_or_hooked:
+		return
+
 	if not moving:
 		backup_timer = 0.0
 		return
