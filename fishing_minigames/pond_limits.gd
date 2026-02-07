@@ -32,5 +32,6 @@ func _pick_random_spawn_point() -> Vector3:
 
 func remove_all_fish() -> void:
 	for fish in spawned_fish:
-		fish.queue_free()
+		if fish:
+			fish.queue_free()
 	spawned_fish.clear()

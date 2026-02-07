@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://bcc7tfs1jooxq" path="res://game/managers/fail_manager.gd" id="6_y36n6"]
 [ext_resource type="PackedScene" uid="uid://bxf3h3pu0htoa" path="res://fishing_minigames/fishing_system.tscn" id="7_u5opy"]
 [ext_resource type="PackedScene" uid="uid://o6v0k7lv0im3" path="res://fish/fish_data/seabass.glb" id="11_3vho3"]
-[ext_resource type="Script" uid="uid://xtkuky7r68lw" path="res://fish/fish_data/fish_spin.gd" id="12_qf6n1"]
+[ext_resource type="Script" path="res://fish/fish_data/fish_spin.gd" id="12_qf6n1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l1rk1"]
 albedo_color = Color(0, 0.30980393, 0, 1)
