@@ -12,6 +12,7 @@ signal on_next()
 @onready var reward_viewport_container: Container = %RewardViewportContainer
 @onready var reward_label: Label = %RewardLabel
 @onready var status_label: Label = %StatusLabel
+@onready var fish_spinner: Node3D = %FishSpinner
 
 
 func show_success(catch: FishResource) -> void:
@@ -21,6 +22,8 @@ func show_success(catch: FishResource) -> void:
 	reward_label.text = catch.display_name
 	
 	status_label.text = success_text
+	
+	fish_spinner.add_child(catch.visual.instantiate())
 
 
 func show_failure() -> void:
@@ -31,4 +34,6 @@ func show_failure() -> void:
 
 
 func _on_next() -> void:
+	for child in fish_spinner.get_children():
+		child.queue_free()
 	on_next.emit()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b100l8rqeryq6"]
+[gd_scene load_steps=27 format=3 uid="uid://b100l8rqeryq6"]
 
 [ext_resource type="Script" uid="uid://b5rqbsti117px" path="res://game/game.gd" id="1_l1rk1"]
 [ext_resource type="PackedScene" uid="uid://p08kc82b12gs" path="res://test_world/art_world/art_world.tscn" id="2_3vho3"]
@@ -15,9 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://cn50nwoi408w6" path="res://ui/idle_ui.tscn" id="13_vsp63"]
 [ext_resource type="AudioStream" uid="uid://ypmon0vf03is" path="res://audio/183500__ecfike__piano-cord.ogg" id="15_ee6o4"]
 [ext_resource type="PackedScene" uid="uid://bk0l7iwlcafde" path="res://game/player.tscn" id="15_hb504"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l1rk1"]
-albedo_color = Color(0, 0.30980393, 0, 1)
 
 [sub_resource type="Gradient" id="Gradient_3vho3"]
 offsets = PackedFloat32Array(0.27070063, 0.4044586)
@@ -84,12 +81,6 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.99
 
 [node name="IdleCameraPosition" type="Node3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3.898575, 2.561685, 3.2997723)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 47.124023)
-visible = false
-size = Vector3(100, 5, 100)
-material = SubResource("StandardMaterial3D_l1rk1")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_l1rk1")

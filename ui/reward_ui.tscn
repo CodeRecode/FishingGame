@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1pg3us6cla78"]
+[gd_scene load_steps=5 format=3 uid="uid://d1pg3us6cla78"]
 
 [ext_resource type="Script" uid="uid://xtkuky7r68lw" path="res://fish/fish_data/fish_spin.gd" id="1_ct8vp"]
 [ext_resource type="Script" uid="uid://hcexuxi6nr2i" path="res://ui/reward_ui.gd" id="1_gyc3q"]
-[ext_resource type="PackedScene" uid="uid://o6v0k7lv0im3" path="res://fish/fish_data/seabass.glb" id="2_gyc3q"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_h7iqs"]
 font_size = 128
@@ -55,12 +54,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0509975, -0.19591105, -6.06
 light_color = Color(0.28628203, 0.69706255, 0.9366047, 1)
 light_energy = 0.2
 
-[node name="Node3D" type="Node3D" parent="RewardViewportContainer/SubViewport/Node3D"]
+[node name="FishSpinner" type="Node3D" parent="RewardViewportContainer/SubViewport/Node3D"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 script = ExtResource("1_ct8vp")
-
-[node name="seabass" parent="RewardViewportContainer/SubViewport/Node3D/Node3D" instance=ExtResource("2_gyc3q")]
-transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 0, 0, 0)
 
 [node name="StatusLabel" type="Label" parent="."]
 unique_name_in_owner = true

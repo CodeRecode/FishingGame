@@ -4,6 +4,7 @@ class_name FishResource
 
 @export var id: int = 0
 @export var display_name: String = ""
+@export var visual: PackedScene = null
 
 @export var move_radius: float = 10.0
 @export var move_speed: float = 700.0

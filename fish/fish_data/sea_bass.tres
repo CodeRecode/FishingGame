@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="FishResource" load_steps=2 format=3 uid="uid://kicqgymp4ag"]
+[gd_resource type="Resource" script_class="FishResource" load_steps=3 format=3 uid="uid://kicqgymp4ag"]
 
 [ext_resource type="Script" uid="uid://b5ikj8rk84yj0" path="res://fish/fish_resource.gd" id="1_5h7kc"]
+[ext_resource type="PackedScene" uid="uid://o6v0k7lv0im3" path="res://fish/fish_data/seabass.glb" id="2_d0kwm"]
 
 [resource]
 script = ExtResource("1_5h7kc")
 display_name = "Sea Bass"
+visual = ExtResource("2_d0kwm")
 move_radius = 25.0
 move_speed = 400.0
 hooking_sequence = Array[int]([0, 1, 2])
