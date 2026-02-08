@@ -83,7 +83,7 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "CREDITS"
 
-[node name="Control" type="Control" parent="."]
+[node name="TitleBox" type="Control" parent="."]
 layout_mode = 1
 anchor_left = 0.35500002
 anchor_right = 0.93000007
@@ -93,7 +93,7 @@ offset_right = 0.5998535
 offset_bottom = 0.31999207
 grow_horizontal = 0
 
-[node name="Label" type="Label" parent="Control"]
+[node name="Title" type="Label" parent="TitleBox"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

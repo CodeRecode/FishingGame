@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://b100l8rqeryq6"]
+[gd_scene load_steps=28 format=3 uid="uid://b100l8rqeryq6"]
 
 [ext_resource type="Script" uid="uid://b5rqbsti117px" path="res://game/game.gd" id="1_l1rk1"]
 [ext_resource type="PackedScene" uid="uid://p08kc82b12gs" path="res://test_world/art_world/art_world.tscn" id="2_3vho3"]
@@ -8,14 +8,12 @@
 [ext_resource type="Script" uid="uid://1u1j71l1p2wg" path="res://game/managers/idle_manager.gd" id="3_dxrkv"]
 [ext_resource type="Script" uid="uid://bvccagct11vkd" path="res://game/camera_shaker.gd" id="4_3vho3"]
 [ext_resource type="Script" uid="uid://ca8ub70hsj3jb" path="res://game/managers/fishing_manager.gd" id="4_u5opy"]
-[ext_resource type="Script" uid="uid://bcc7tfs1jooxq" path="res://game/managers/fail_manager.gd" id="6_y36n6"]
 [ext_resource type="PackedScene" uid="uid://bxf3h3pu0htoa" path="res://fishing_minigames/fishing_system.tscn" id="7_u5opy"]
 [ext_resource type="AudioStream" uid="uid://bjxokd68tht3s" path="res://audio/dream-protocol-lake-fishing-inspirational-acoustic-guitars-115076.ogg" id="8_b686c"]
 [ext_resource type="AudioStream" uid="uid://bruvq5bjctpwn" path="res://audio/256128__jimhancock__tada.ogg" id="9_vsp63"]
-[ext_resource type="PackedScene" uid="uid://o6v0k7lv0im3" path="res://fish/fish_data/seabass.glb" id="11_3vho3"]
-[ext_resource type="AudioStream" uid="uid://ypmon0vf03is" path="res://audio/183500__ecfike__piano-cord.ogg" id="15_ee6o4"]
-[ext_resource type="Script" uid="uid://xtkuky7r68lw" path="res://fish/fish_data/fish_spin.gd" id="12_qf6n1"]
+[ext_resource type="PackedScene" uid="uid://d1pg3us6cla78" path="res://ui/reward_ui.tscn" id="12_hb504"]
 [ext_resource type="PackedScene" uid="uid://cn50nwoi408w6" path="res://ui/idle_ui.tscn" id="13_vsp63"]
+[ext_resource type="AudioStream" uid="uid://ypmon0vf03is" path="res://audio/183500__ecfike__piano-cord.ogg" id="15_ee6o4"]
 [ext_resource type="PackedScene" uid="uid://bk0l7iwlcafde" path="res://game/player.tscn" id="15_hb504"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l1rk1"]
@@ -73,15 +71,6 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
 point_count = 5
-
-[sub_resource type="LabelSettings" id="LabelSettings_h7iqs"]
-font_size = 128
-
-[sub_resource type="LabelSettings" id="LabelSettings_4fuuu"]
-font_size = 64
-
-[sub_resource type="LabelSettings" id="LabelSettings_dakft"]
-font_size = 32
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_l1rk1")
@@ -143,10 +132,9 @@ camera_look_target = NodePath("../CameraLookTarget")
 game = NodePath("..")
 metadata/_custom_type_script = "uid://ca8ub70hsj3jb"
 
-[node name="RewardManager" type="Node" parent="." node_paths=PackedStringArray("reward_ui", "reward_label", "reward_audio", "game")]
+[node name="RewardManager" type="Node" parent="." node_paths=PackedStringArray("reward_ui", "reward_audio", "game")]
 script = ExtResource("3_4fuuu")
 reward_ui = NodePath("../Control/RewardUI")
-reward_label = NodePath("../Control/RewardUI/RewardLabel")
 reward_audio = NodePath("TadaPlayer")
 game = NodePath("..")
 metadata/_custom_type_script = "uid://dixi11gvyp0fs"
@@ -154,12 +142,6 @@ metadata/_custom_type_script = "uid://dixi11gvyp0fs"
 [node name="TadaPlayer" type="AudioStreamPlayer" parent="RewardManager"]
 stream = ExtResource("9_vsp63")
 volume_db = -1.0
-
-[node name="FailManager" type="Node" parent="." node_paths=PackedStringArray("fail_ui", "game")]
-script = ExtResource("6_y36n6")
-fail_ui = NodePath("../Control/FailUI")
-game = NodePath("..")
-metadata/_custom_type_script = "uid://bcc7tfs1jooxq"
 
 [node name="FishingSystem" parent="." instance=ExtResource("7_u5opy")]
 
@@ -181,165 +163,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RewardUI" type="Control" parent="Control"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Control/RewardUI"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SubViewport" type="SubViewport" parent="Control/RewardUI/SubViewportContainer"]
-own_world_3d = true
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(1280, 720)
-render_target_update_mode = 0
-
-[node name="Node3D" type="Node3D" parent="Control/RewardUI/SubViewportContainer/SubViewport"]
-
-[node name="Camera3D" type="Camera3D" parent="Control/RewardUI/SubViewportContainer/SubViewport/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32571578, 1.3259151)
-fov = 35.0
-
-[node name="KeyLight" type="OmniLight3D" parent="Control/RewardUI/SubViewportContainer/SubViewport/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17722082, 1.0307121, -2.6048584)
-light_energy = 2.0
-
-[node name="FillLight" type="OmniLight3D" parent="Control/RewardUI/SubViewportContainer/SubViewport/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9443097, 0.19792604, -4.769332)
-light_color = Color(0.77041346, 0.6881779, 0.491046, 1)
-light_energy = 0.6
-
-[node name="RimLight" type="OmniLight3D" parent="Control/RewardUI/SubViewportContainer/SubViewport/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0509975, -0.19591105, -6.0625677)
-light_color = Color(0.28628203, 0.69706255, 0.9366047, 1)
-light_energy = 0.2
-
-[node name="Node3D" type="Node3D" parent="Control/RewardUI/SubViewportContainer/SubViewport/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
-script = ExtResource("12_qf6n1")
-
-[node name="seabass" parent="Control/RewardUI/SubViewportContainer/SubViewport/Node3D/Node3D" instance=ExtResource("11_3vho3")]
-transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 0, 0, 0)
-
-[node name="NiceCatchLabel" type="Label" parent="Control/RewardUI"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -51.0
-offset_right = 51.0
-offset_bottom = 23.0
-grow_horizontal = 2
-text = "NICE CATCH!!"
-label_settings = SubResource("LabelSettings_h7iqs")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="RewardLabel" type="Label" parent="Control/RewardUI"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -405.5
-offset_top = -175.0
-offset_right = 405.5
-grow_horizontal = 2
-grow_vertical = 0
-text = "FISH"
-label_settings = SubResource("LabelSettings_4fuuu")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="NextButton" type="Button" parent="Control/RewardUI"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -245.0
-offset_top = -145.0
-offset_right = -50.0
-offset_bottom = -74.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="Label" type="Label" parent="Control/RewardUI/NextButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "NEXT"
-label_settings = SubResource("LabelSettings_dakft")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="FailUI" type="Control" parent="Control"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="FailLabel" type="Label" parent="Control/FailUI"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -405.5
-offset_right = 405.5
-offset_bottom = 175.0
-grow_horizontal = 2
-text = "It got away..."
-label_settings = SubResource("LabelSettings_h7iqs")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="NextButton" type="Button" parent="Control/FailUI"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -245.0
-offset_top = -145.0
-offset_right = -50.0
-offset_bottom = -74.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="Label" type="Label" parent="Control/FailUI/NextButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "NEXT"
-label_settings = SubResource("LabelSettings_dakft")
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="IdleUI" parent="Control" instance=ExtResource("13_vsp63")]
 visible = false
+layout_mode = 1
+
+[node name="RewardUI" parent="Control" instance=ExtResource("12_hb504")]
 layout_mode = 1
 
 [node name="Audio" type="Node" parent="."]
@@ -359,6 +187,5 @@ stream = ExtResource("15_ee6o4")
 [connection signal="look_at_bobber" from="FishingSystem" to="FishingManager" method="_on_look_at_bobber"]
 [connection signal="look_at_casting_indicator" from="FishingSystem" to="FishingManager" method="_on_look_at_casting_indicator"]
 [connection signal="state_changed" from="FishingSystem" to="FishingManager" method="_on_fishing_system_state_changed"]
-[connection signal="pressed" from="Control/RewardUI/NextButton" to="." method="go_to_idle"]
-[connection signal="pressed" from="Control/FailUI/NextButton" to="." method="go_to_idle"]
 [connection signal="fish_start_requested" from="Control/IdleUI" to="." method="go_to_fishing"]
+[connection signal="on_next" from="Control/RewardUI" to="." method="go_to_idle"]

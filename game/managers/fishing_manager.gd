@@ -19,28 +19,23 @@ func _init() -> void:
 func _on_activate() -> void:
 	set_fishing_game_active.emit(true)
 
-func succeed_catch() -> void:
-	game.catch(load("res://fish/fish_data/sea_bass.tres")) # TEMP: All fish are sea bass
-	game.current_state = Game.State.REWARD
-
-func fail_catch() -> void:
-	game.current_state = Game.State.FAIL
-
 func _on_fishing_system_state_changed(new_state: State) -> void:
 	if new_state is FailureState:
-		set_fishing_game_active.emit(false)
-		game.current_state = Game.State.FAIL
+		game.fail_catch()
 		failure_chord_player.play()
-	elif new_state is SuccessState:
-		game.catch(new_state.fish_caught.fish_data)
 		set_fishing_game_active.emit(false)
-		game.current_state = Game.State.REWARD
+	elif new_state is SuccessState:
+		game.succeed_catch(new_state.fish_caught.fish_data)
+		set_fishing_game_active.emit(false)
+
 
 func _on_look_at_bobber(bobber: CharacterBody3D) -> void:
 	_look_at_target = bobber
 
+
 func _on_look_at_casting_indicator(casting_indicator: CharacterBody3D) -> void:
 	_look_at_target = casting_indicator
+
 
 func _process(delta: float) -> void:
 	if !camera:

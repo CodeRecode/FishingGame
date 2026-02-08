@@ -1,21 +1,24 @@
 class_name Game
 extends Node3D
 
+
 enum State {
 	UNKNOWN,
 	INTRO,
 	IDLE,
 	FISHING,
 	REWARD,
-	FAIL,
 }
+
 
 signal state_enter(state: Game.State)
 signal state_exit(state: Game.State)
+signal on_succeed_catch(catch:FishResource)
+signal on_fail_catch()
 
-signal on_catch(catch:FishResource)
 
 var _current_state: Game.State = Game.State.UNKNOWN
+
 
 var current_state: Game.State:
 	get:
@@ -25,15 +28,24 @@ var current_state: Game.State:
 		_current_state = state;
 		state_enter.emit(_current_state)
 
+
 func _ready() -> void:
 	current_state = Game.State.INTRO
 
 
-func catch(fish:FishResource) -> void:
-	on_catch.emit(fish)
+func succeed_catch(fish:FishResource) -> void:
+	current_state = Game.State.REWARD
+	on_succeed_catch.emit(fish)
+
+
+func fail_catch() -> void:
+	current_state = Game.State.REWARD
+	on_fail_catch.emit()
+
 
 func go_to_idle() -> void:
 	current_state = Game.State.IDLE
+
 
 func go_to_fishing() -> void:
 	current_state = Game.State.FISHING
