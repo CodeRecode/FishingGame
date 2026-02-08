@@ -1,11 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://bve4rie017drx"]
+[gd_scene load_steps=4 format=3 uid="uid://dxegw5oy4b40d"]
 
-[ext_resource type="Script" uid="uid://hhw57xxary3a" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://crailaw4adgcf" path="res://ui/menu_ui.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://b100l8rqeryq6" path="res://game/game.tscn" id="2_h2yge"]
 
+[sub_resource type="GDScript" id="GDScript_0xm2m"]
+script/source = "extends Node
+
+@export var game_scene: PackedScene
+
+
+func change_to_game_scene() -> void:
+	get_tree().change_scene_to_packed(game_scene)
+"
+
 [node name="Main" type="Node3D"]
-script = ExtResource("1_0xm2m")
+script = SubResource("GDScript_0xm2m")
 game_scene = ExtResource("2_h2yge")
 
 [node name="MenuUI" parent="." instance=ExtResource("1_ig7tw")]

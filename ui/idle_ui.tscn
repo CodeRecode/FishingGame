@@ -1,0 +1,114 @@
+[gd_scene load_steps=5 format=3 uid="uid://cn50nwoi408w6"]
+
+[ext_resource type="Script" uid="uid://bg4gk5k2il638" path="res://game/idle_ui.gd" id="1_cb0gp"]
+[ext_resource type="PackedScene" uid="uid://bcw84p2yavnkb" path="res://ui/settings_menu.tscn" id="2_pk72x"]
+[ext_resource type="PackedScene" uid="uid://blfun3f2cnxn0" path="res://ui/credits_menu.tscn" id="3_tsxs0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cb0gp"]
+font_size = 100
+
+[node name="IdleUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cb0gp")
+
+[node name="SettingsMenu" parent="." instance=ExtResource("2_pk72x")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -114.5
+offset_top = -90.0
+offset_right = 114.5
+offset_bottom = 90.0
+
+[node name="CreditsMenu" parent="." instance=ExtResource("3_tsxs0")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -310.0
+offset_top = -165.0
+offset_right = 310.0
+offset_bottom = 165.0
+
+[node name="Buttons" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="Button" parent="Buttons"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -97.5
+offset_top = -145.0
+offset_right = 97.5
+offset_bottom = -74.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "START"
+
+[node name="SettingsButton" type="Button" parent="Buttons"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -120.0
+offset_right = 220.0
+offset_bottom = -49.0
+grow_vertical = 0
+text = "SETTINGS"
+
+[node name="Credits" type="Button" parent="Buttons"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -120.0
+offset_right = -25.0
+offset_bottom = -49.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "CREDITS"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.35500002
+anchor_right = 0.93000007
+anchor_bottom = 0.344
+offset_left = -0.4000244
+offset_right = 0.5998535
+offset_bottom = 0.31999207
+grow_horizontal = 0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -15.5
+offset_right = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "FISHING GAME"
+label_settings = SubResource("LabelSettings_cb0gp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="on_close" from="SettingsMenu" to="." method="_reset"]
+[connection signal="on_close" from="CreditsMenu" to="." method="_reset"]
+[connection signal="pressed" from="Buttons/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Buttons/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="Buttons/Credits" to="." method="_on_credits_button_pressed"]
