@@ -6,6 +6,8 @@ extends BaseManager
 @export var camera_look_target: Node3D
 @export var cam_speed: float = 5.0
 
+@onready var failure_chord_player: AudioStreamPlayer = %FailureChordPlayer
+
 signal set_fishing_game_active(value: bool)
 
 var debug_force_success: bool = true
@@ -28,6 +30,7 @@ func _on_fishing_system_state_changed(new_state: State) -> void:
 	if new_state is FailureState:
 		set_fishing_game_active.emit(false)
 		game.current_state = Game.State.FAIL
+		failure_chord_player.play()
 	elif new_state is SuccessState:
 		game.catch(new_state.fish_caught.fish_data)
 		set_fishing_game_active.emit(false)

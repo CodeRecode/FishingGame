@@ -9,11 +9,13 @@ signal look_at_bobber(bobber: CharacterBody3D)
 @export var casting_state: State
 @export var hooked_state: State
 
-
 @onready var pond_limits: Area3D = %PondLimits
 @onready var pond_collider: CollisionShape3D = %CollisionShape3D
 @onready var bobber: CharacterBody3D = %BobberTest
 @onready var bobber_anim_player: AnimationPlayer = %AnimationPlayer
+
+@onready var failure_chord_player_fs: AudioStreamPlayer = %FailureChordPlayerFS
+@onready var nibble_player: AudioStreamPlayer = %NibblePlayer
 
 
 var bobber_speed: float = 1000.0
@@ -100,12 +102,17 @@ func _nibble(delta: float) -> void:
 
 	if timer >= detected_fish.fish_data.input_window_seconds and nibble_count >= detected_fish.fish_data.nibbles_before_flee:
 		detected_fish.queue_free()
+		timer = 0.0
+		nibble_count = 0
+		failure_chord_player_fs.play()
+		return
 
 	if timer >= detected_fish.fish_data.input_window_seconds and nibble_count < detected_fish.fish_data.nibbles_before_flee:
 		nibble_count += 1
 		bobber_anim_player.play("bob")
 		add_camera_shake.emit(0.8)
 		timer = 0.0
+		nibble_player.play()
 
 
 func _on_cancel_reeling_area_body_entered(body: Node3D) -> void:
