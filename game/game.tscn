@@ -168,6 +168,7 @@ visible = false
 layout_mode = 1
 
 [node name="RewardUI" parent="UI" instance=ExtResource("12_hb504")]
+visible = false
 layout_mode = 1
 
 [node name="Audio" type="Node" parent="."]

@@ -35,52 +35,55 @@ offset_bottom = 165.0
 [node name="Buttons" type="Control" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.039
+anchor_top = 0.83300006
+anchor_right = 0.961
+anchor_bottom = 0.97200006
+offset_left = 0.07999802
+offset_top = 0.2399292
+offset_right = -0.080078125
+offset_bottom = 0.15997314
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="StartButton" type="Button" parent="Buttons"]
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
+anchor_bottom = 0.5
 offset_left = -97.5
-offset_top = -145.0
+offset_top = -35.5
 offset_right = 97.5
-offset_bottom = -74.0
+offset_bottom = 35.5
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 text = "START"
 
 [node name="SettingsButton" type="Button" parent="Buttons"]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 25.0
-offset_top = -120.0
-offset_right = 220.0
-offset_bottom = -49.0
-grow_vertical = 0
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -35.5
+offset_right = 195.0
+offset_bottom = 35.5
+grow_vertical = 2
 text = "SETTINGS"
 
 [node name="Credits" type="Button" parent="Buttons"]
 layout_mode = 1
-anchors_preset = 3
+anchors_preset = 6
 anchor_left = 1.0
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -220.0
-offset_top = -120.0
-offset_right = -25.0
-offset_bottom = -49.0
+anchor_bottom = 0.5
+offset_left = -195.0
+offset_top = -35.5
+offset_bottom = 35.5
 grow_horizontal = 0
-grow_vertical = 0
+grow_vertical = 2
 text = "CREDITS"
 
 [node name="TitleBox" type="Control" parent="."]
