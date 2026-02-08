@@ -1,5 +1,5 @@
 extends CharacterBody3D
-class_name TestFish
+class_name Fish
 
 
 const WAIT_VARIANCE: float = 0.3

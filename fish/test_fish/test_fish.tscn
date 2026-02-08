@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cakbfjw703agb"]
 
-[ext_resource type="Script" uid="uid://ciov2fosm25kv" path="res://fish/test_fish/test_fish.gd" id="1_3puks"]
+[ext_resource type="Script" uid="uid://ciov2fosm25kv" path="fish.gd" id="1_3puks"]
 [ext_resource type="Resource" uid="uid://kicqgymp4ag" path="res://fish/fish_data/sea_bass.tres" id="2_3l7mb"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tta6g"]

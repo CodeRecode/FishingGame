@@ -20,7 +20,7 @@ signal look_at_bobber(bobber: CharacterBody3D)
 
 var bobber_speed: float = 1000.0
 var bobber_starting_position: Vector3 = Vector3.ZERO
-var detected_fish: TestFish = null
+var detected_fish: Fish = null
 var nibble_count: int = 0
 var timer: float = 0.0
 var cancel_reeling: bool = false
@@ -31,12 +31,12 @@ func _ready() -> void:
 
 
 func _on_fish_detector_body_entered(fish: CharacterBody3D) -> void:
-	if fish is TestFish:
+	if fish is Fish:
 		detected_fish = fish
 
 
 func _on_fish_detector_body_exited(fish: Node3D) -> void:
-	if fish is TestFish:
+	if fish is Fish:
 		detected_fish = null
 
 

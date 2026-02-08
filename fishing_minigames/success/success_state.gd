@@ -11,7 +11,7 @@ signal look_at_bobber(bobber: CharacterBody3D)
 @onready var controls: ColorRect = %Controls
 
 
-var fish_caught: TestFish = null
+var fish_caught: Fish = null
 
 
 func enter(_previous_state: State) -> void:

@@ -5,7 +5,7 @@ class_name FishSpawner
 @onready var collision_shape: CollisionShape3D = %CollisionShape3D
 
 
-var spawned_fish: Array[TestFish]
+var spawned_fish: Array[Fish]
 
 
 func spawn_fish(fish_array: Array[PackedScene]) -> void:

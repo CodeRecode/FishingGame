@@ -15,7 +15,7 @@ signal add_camera_shake(impact: float)
 
 var camera: Camera3D
 
-var hooked_fish: TestFish = null
+var hooked_fish: Fish = null
 var current_input_index: int = 0
 var timer: float = 0.0
 
