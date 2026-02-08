@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b100l8rqeryq6"]
+[gd_scene load_steps=32 format=3 uid="uid://b100l8rqeryq6"]
 
 [ext_resource type="Script" uid="uid://b5rqbsti117px" path="res://game/game.gd" id="1_l1rk1"]
 [ext_resource type="PackedScene" uid="uid://p08kc82b12gs" path="res://test_world/art_world/art_world.tscn" id="2_3vho3"]
@@ -13,7 +13,8 @@
 [ext_resource type="AudioStream" uid="uid://bjxokd68tht3s" path="res://audio/dream-protocol-lake-fishing-inspirational-acoustic-guitars-115076.ogg" id="8_b686c"]
 [ext_resource type="AudioStream" uid="uid://bruvq5bjctpwn" path="res://audio/256128__jimhancock__tada.ogg" id="9_vsp63"]
 [ext_resource type="PackedScene" uid="uid://o6v0k7lv0im3" path="res://fish/fish_data/seabass.glb" id="11_3vho3"]
-[ext_resource type="Script" path="res://fish/fish_data/fish_spin.gd" id="12_qf6n1"]
+[ext_resource type="Script" uid="uid://xtkuky7r68lw" path="res://fish/fish_data/fish_spin.gd" id="12_qf6n1"]
+[ext_resource type="PackedScene" uid="uid://cn50nwoi408w6" path="res://ui/idle_ui.tscn" id="13_vsp63"]
 [ext_resource type="PackedScene" uid="uid://bk0l7iwlcafde" path="res://game/player.tscn" id="15_hb504"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l1rk1"]
@@ -180,6 +181,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="RewardUI" type="Control" parent="Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -200,7 +202,7 @@ own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1280, 720)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Node3D" type="Node3D" parent="Control/RewardUI/SubViewportContainer/SubViewport"]
 
@@ -257,9 +259,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -245.0
-offset_top = -121.0
+offset_top = -145.0
 offset_right = -50.0
-offset_bottom = -50.0
+offset_bottom = -74.0
 grow_horizontal = 0
 grow_vertical = 0
 
@@ -306,9 +308,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -245.0
-offset_top = -121.0
+offset_top = -145.0
 offset_right = -50.0
-offset_bottom = -50.0
+offset_bottom = -74.0
 grow_horizontal = 0
 grow_vertical = 0
 
@@ -324,40 +326,9 @@ label_settings = SubResource("LabelSettings_dakft")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="IdleUI" type="Control" parent="Control"]
+[node name="IdleUI" parent="Control" instance=ExtResource("13_vsp63")]
 visible = false
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CastButton" type="Button" parent="Control/IdleUI"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -97.5
-offset_top = -121.0
-offset_right = 97.5
-offset_bottom = -50.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="Label" type="Label" parent="Control/IdleUI/CastButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "CAST"
-label_settings = SubResource("LabelSettings_dakft")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Audio" type="Node" parent="."]
 
@@ -374,4 +345,4 @@ stream = ExtResource("8_b686c")
 [connection signal="state_changed" from="FishingSystem" to="FishingManager" method="_on_fishing_system_state_changed"]
 [connection signal="pressed" from="Control/RewardUI/NextButton" to="." method="go_to_idle"]
 [connection signal="pressed" from="Control/FailUI/NextButton" to="." method="go_to_idle"]
-[connection signal="pressed" from="Control/IdleUI/CastButton" to="." method="go_to_fishing"]
+[connection signal="fish_start_requested" from="Control/IdleUI" to="." method="go_to_fishing"]
