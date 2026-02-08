@@ -117,7 +117,7 @@ metadata/_custom_type_script = "uid://c6pt85if43w4h"
 
 [node name="IdleManager" type="Node" parent="." node_paths=PackedStringArray("idle_ui", "camera", "camera_pos", "camera_look_target", "game")]
 script = ExtResource("3_dxrkv")
-idle_ui = NodePath("../Control/IdleUI")
+idle_ui = NodePath("../UI/IdleUI")
 camera = NodePath("../CameraShaker/Camera3D")
 camera_pos = NodePath("../IdleCameraPosition")
 camera_look_target = NodePath("../CameraLookTarget")
@@ -134,7 +134,7 @@ metadata/_custom_type_script = "uid://ca8ub70hsj3jb"
 
 [node name="RewardManager" type="Node" parent="." node_paths=PackedStringArray("reward_ui", "reward_audio", "game")]
 script = ExtResource("3_4fuuu")
-reward_ui = NodePath("../Control/RewardUI")
+reward_ui = NodePath("../UI/RewardUI")
 reward_audio = NodePath("TadaPlayer")
 game = NodePath("..")
 metadata/_custom_type_script = "uid://dixi11gvyp0fs"
@@ -155,7 +155,7 @@ curve = SubResource("Curve3D_vasa2")
 [node name="PathFollow3D" type="PathFollow3D" parent="IntroPath"]
 transform = Transform3D(0.59115624, -0.2074082, 0.77940226, -7.450352e-09, 0.96635306, 0.25715554, -0.80651903, -0.15202451, 0.57128036, 79.606094, 30.720234, 85.11725)
 
-[node name="Control" type="Control" parent="."]
+[node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -163,11 +163,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="IdleUI" parent="Control" instance=ExtResource("13_vsp63")]
+[node name="IdleUI" parent="UI" instance=ExtResource("13_vsp63")]
 visible = false
 layout_mode = 1
 
-[node name="RewardUI" parent="Control" instance=ExtResource("12_hb504")]
+[node name="RewardUI" parent="UI" instance=ExtResource("12_hb504")]
 layout_mode = 1
 
 [node name="Audio" type="Node" parent="."]
@@ -187,5 +187,5 @@ stream = ExtResource("15_ee6o4")
 [connection signal="look_at_bobber" from="FishingSystem" to="FishingManager" method="_on_look_at_bobber"]
 [connection signal="look_at_casting_indicator" from="FishingSystem" to="FishingManager" method="_on_look_at_casting_indicator"]
 [connection signal="state_changed" from="FishingSystem" to="FishingManager" method="_on_fishing_system_state_changed"]
-[connection signal="fish_start_requested" from="Control/IdleUI" to="." method="go_to_fishing"]
-[connection signal="on_next" from="Control/RewardUI" to="." method="go_to_idle"]
+[connection signal="fish_start_requested" from="UI/IdleUI" to="." method="go_to_fishing"]
+[connection signal="on_next" from="UI/RewardUI" to="." method="go_to_idle"]
