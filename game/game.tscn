@@ -133,6 +133,7 @@ metadata/_custom_type_script = "uid://dixi11gvyp0fs"
 [node name="TadaPlayer" type="AudioStreamPlayer" parent="RewardManager"]
 stream = ExtResource("9_vsp63")
 volume_db = -1.0
+bus = &"Music"
 
 [node name="FishingSystem" parent="." instance=ExtResource("7_u5opy")]
 
@@ -167,10 +168,12 @@ layout_mode = 1
 [node name="CalmMusicPlayer" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("8_b686c")
+bus = &"Music"
 
 [node name="FailureChordPlayer" type="AudioStreamPlayer" parent="Audio"]
 unique_name_in_owner = true
 stream = ExtResource("15_ee6o4")
+bus = &"Music"
 
 [node name="Player" parent="." instance=ExtResource("15_hb504")]
 
