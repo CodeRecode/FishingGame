@@ -15,6 +15,7 @@ func _input(event: InputEvent) -> void:
 		
 	if is_visible_in_tree() && event.is_action_pressed(press_input_action, true):
 		emit_signal("pressed")
+		get_viewport().set_input_as_handled()
 
 
 func _on_input_type_changed(_type: InputManager.InputType) -> void:
