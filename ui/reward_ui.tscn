@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1pg3us6cla78"]
+[gd_scene load_steps=6 format=3 uid="uid://d1pg3us6cla78"]
 
 [ext_resource type="Script" uid="uid://xtkuky7r68lw" path="res://fish/fish_data/fish_spin.gd" id="1_ct8vp"]
 [ext_resource type="Script" uid="uid://hcexuxi6nr2i" path="res://ui/reward_ui.gd" id="1_gyc3q"]
+[ext_resource type="Script" uid="uid://b612mcx1h2b1a" path="res://ui/input_button.gd" id="3_gyc3q"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_h7iqs"]
 font_size = 128
@@ -106,5 +107,8 @@ offset_bottom = -74.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "NEXT"
+script = ExtResource("3_gyc3q")
+press_input_action = "ui_confirm"
+metadata/_custom_type_script = "uid://b612mcx1h2b1a"
 
 [connection signal="pressed" from="NextButton" to="." method="_on_next"]
