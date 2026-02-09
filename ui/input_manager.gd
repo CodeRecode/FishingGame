@@ -56,7 +56,7 @@ func _set_current_input_type(type: InputType) -> void:
 	on_input_type_changed.emit(type)
 
 
-func _on_joy_connection_changed(device: int, connected: bool) -> void:
+func _on_joy_connection_changed(_device: int, connected: bool) -> void:
 	if connected:
 		_set_current_input_type(InputType.GAMEPAD)
 

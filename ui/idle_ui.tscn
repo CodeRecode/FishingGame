@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cn50nwoi408w6"]
+[gd_scene load_steps=6 format=3 uid="uid://cn50nwoi408w6"]
 
 [ext_resource type="Script" uid="uid://bg4gk5k2il638" path="res://game/idle_ui.gd" id="1_cb0gp"]
 [ext_resource type="PackedScene" uid="uid://bcw84p2yavnkb" path="res://ui/settings_menu.tscn" id="2_pk72x"]
 [ext_resource type="PackedScene" uid="uid://blfun3f2cnxn0" path="res://ui/credits_menu.tscn" id="3_tsxs0"]
+[ext_resource type="Script" uid="uid://b612mcx1h2b1a" path="res://ui/input_button.gd" id="4_pk72x"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cb0gp"]
 font_size = 100
@@ -60,6 +61,9 @@ offset_bottom = 35.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "START"
+script = ExtResource("4_pk72x")
+press_input_action = "ui_start"
+metadata/_custom_type_script = "uid://b612mcx1h2b1a"
 
 [node name="SettingsButton" type="Button" parent="Buttons"]
 layout_mode = 1
@@ -71,6 +75,8 @@ offset_right = 195.0
 offset_bottom = 35.5
 grow_vertical = 2
 text = "SETTINGS"
+script = ExtResource("4_pk72x")
+metadata/_custom_type_script = "uid://b612mcx1h2b1a"
 
 [node name="Credits" type="Button" parent="Buttons"]
 layout_mode = 1
@@ -85,6 +91,8 @@ offset_bottom = 35.5
 grow_horizontal = 0
 grow_vertical = 2
 text = "CREDITS"
+script = ExtResource("4_pk72x")
+metadata/_custom_type_script = "uid://b612mcx1h2b1a"
 
 [node name="TitleBox" type="Control" parent="."]
 layout_mode = 1

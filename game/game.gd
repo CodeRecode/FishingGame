@@ -18,20 +18,27 @@ signal on_fail_catch()
 
 
 var _current_state: Game.State = Game.State.UNKNOWN
-
+var _next_state: Game.State = Game.State.UNKNOWN
 
 var current_state: Game.State:
 	get:
 		return _current_state;
 	set(state):
-		state_exit.emit(_current_state)
-		_current_state = state;
-		state_enter.emit(_current_state)
+		_next_state = state
 
 
 func _ready() -> void:
 	current_state = Game.State.INTRO
 
+
+func _process(_delta: float) -> void:
+	if _current_state == _next_state:
+		return
+	
+	Input.flush_buffered_events() # flush any inputs on stack
+	state_exit.emit(_current_state)
+	_current_state = _next_state;
+	state_enter.emit(_current_state)
 
 func succeed_catch(fish:FishResource) -> void:
 	current_state = Game.State.REWARD

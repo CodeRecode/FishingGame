@@ -10,6 +10,9 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if press_input_action == "":
+		return
+		
 	if is_visible_in_tree() && event.is_action_pressed(press_input_action, true):
 		emit_signal("pressed")
 

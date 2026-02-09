@@ -117,5 +117,5 @@ func _nibble(delta: float) -> void:
 		nibble_player.play()
 
 
-func _on_cancel_reeling_area_body_entered(body: Node3D) -> void:
+func _on_cancel_reeling_area_body_entered(_body: Node3D) -> void:
 	cancel_reeling = true
