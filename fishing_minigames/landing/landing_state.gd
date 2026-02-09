@@ -59,6 +59,8 @@ func physics_update(delta: float) -> State:
 
 	countdown_prompt.value = clampf(timer, 0.0, hooked_fish.fish_data.input_window_seconds)
 
+	bobber.global_position = hooked_fish.global_position
+
 	if timer > hooked_fish.fish_data.input_window_seconds or Input.is_action_just_pressed("cancel"):
 		return failure_state
 
