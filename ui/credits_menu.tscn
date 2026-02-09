@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://blfun3f2cnxn0"]
+[gd_scene load_steps=3 format=3 uid="uid://blfun3f2cnxn0"]
 
 [ext_resource type="Script" uid="uid://rn7s1rx1dr1f" path="res://ui/popup_menu.gd" id="1_ow8kg"]
+[ext_resource type="Script" uid="uid://b612mcx1h2b1a" path="res://ui/input_button.gd" id="2_6sxy1"]
 
 [node name="CreditsMenu" type="PanelContainer"]
 visible = false
@@ -49,6 +50,9 @@ layout_mode = 2
 
 [node name="CreditsCloseButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Close"
+text = "CLOSE"
+script = ExtResource("2_6sxy1")
+press_input_action = "ui_cancel"
+metadata/_custom_type_script = "uid://b612mcx1h2b1a"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/CreditsCloseButton" to="." method="_on_close_pressed"]

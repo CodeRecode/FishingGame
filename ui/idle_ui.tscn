@@ -76,6 +76,7 @@ offset_bottom = 35.5
 grow_vertical = 2
 text = "SETTINGS"
 script = ExtResource("4_pk72x")
+press_input_action = "ui_settings"
 metadata/_custom_type_script = "uid://b612mcx1h2b1a"
 
 [node name="Credits" type="Button" parent="Buttons"]
@@ -92,6 +93,7 @@ grow_horizontal = 0
 grow_vertical = 2
 text = "CREDITS"
 script = ExtResource("4_pk72x")
+press_input_action = "ui_credits"
 metadata/_custom_type_script = "uid://b612mcx1h2b1a"
 
 [node name="TitleBox" type="Control" parent="."]

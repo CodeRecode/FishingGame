@@ -1,8 +1,6 @@
 extends Node
 
 #region Input Atlas Coords
-
-#region Input Atlas Coords
 const PROMPT_RECTS := {
 	"KEY_SPACE": Rect2(Vector2(448,192), Vector2(64,64)),
 
@@ -12,15 +10,15 @@ const PROMPT_RECTS := {
 	"KEY_D":     	Rect2(Vector2(384,640), Vector2(64,64)),
 	#"KEY_ESCAPE":   Rect2i(128, 0, 64, 64),
 
-	"PAD_FACE_DOWN": Rect2(Vector2(0,256), Vector2(64,64)),
-	#"PAD_FACE_RIGHT":  Rect2i(64, 128, 64, 64),
-	#"PAD_FACE_LEFT":  Rect2i(128, 128, 64, 64),
-	#"PAD_FACE_UP": Rect2i(192, 128, 64, 64),
+	"PAD_FACE_DOWN": 	Rect2(128, 512, 64, 64),
+	"PAD_FACE_RIGHT":  	Rect2(256, 512, 64, 64),
+	"PAD_FACE_LEFT":  	Rect2(384, 512, 64, 64),
+	"PAD_FACE_UP": 		Rect2(512, 512, 64, 64),
 
-	"PAD_DPAD_UP": 		Rect2(Vector2(128,64), Vector2(64,64)),
-	"PAD_DPAD_DOWN":	Rect2(Vector2(320,192), Vector2(64,64)),
-	"PAD_DPAD_LEFT":	Rect2(Vector2(192,128), Vector2(64,64)),
-	"PAD_DPAD_RIGHT":	Rect2(Vector2(0,64), Vector2(64,64)),
+	"PAD_DPAD_UP": 		Rect2(64, 256, 64, 64),
+	"PAD_DPAD_DOWN":	Rect2(192, 256, 64, 64),
+	"PAD_DPAD_LEFT":	Rect2(0, 256, 64, 64),
+	"PAD_DPAD_RIGHT":	Rect2(128, 256, 64, 64),
 }
 #endregion
 
@@ -37,7 +35,7 @@ var _gamepad_atlas: AtlasTexture = AtlasTexture.new()
 var _mkb_atlas: AtlasTexture = AtlasTexture.new()
 
 func _ready() -> void:
-	_gamepad_atlas.atlas = load("res://ui/ui_input_prompts/playdate_sheet_default.png")
+	_gamepad_atlas.atlas = load("res://ui/ui_input_prompts/xbox-series_sheet_default.png")
 	_mkb_atlas.atlas = load("res://ui/ui_input_prompts/keyboard-&-mouse_sheet_default.png")
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 
