@@ -40,6 +40,7 @@ func _ready() -> void:
 
 func _game_state_enter(state: Game.State):
 	if _is_state_to_activate(state):
+		Input.flush_buffered_events()
 		_is_active = true
 		set_process(true)
 		_on_activate()
