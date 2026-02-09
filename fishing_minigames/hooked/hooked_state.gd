@@ -10,6 +10,8 @@ signal add_camera_shake(impact: float)
 
 
 @onready var countdown_prompt: CountdownPrompt = %CountdownPrompt
+@onready var cancel_reeling_area: Area3D = %CancelReelingArea
+@onready var bobber: CharacterBody3D = %BobberTest
 
 
 var camera: Camera3D = null
@@ -28,6 +30,7 @@ func enter(_previous_state: State) -> void:
 
 	if _previous_state is ReelingState:
 		hooked_fish = _previous_state.detected_fish
+		hooked_fish.nibbling = false
 
 	current_input_index = 0
 	timer = 0.0
@@ -65,6 +68,9 @@ func physics_update(delta: float) -> State:
 		if starting_index < current_input_index:
 			timer = 0.0
 			add_camera_shake.emit(0.7)
+			hooked_fish.start_wriggle()
+			hooked_fish.reel_fish_towards_caster(cancel_reeling_area.global_position, hooked_fish.fish_data.hooking_sequence.size())
+			bobber.global_position = hooked_fish.global_position
 
 	elif current_input_index >= hooked_fish.fish_data.hooking_sequence.size():
 		return landing_state

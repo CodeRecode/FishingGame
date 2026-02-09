@@ -1,6 +1,9 @@
 extends Node3D
 
 
+signal camera_shaking(value: bool)
+
+
 @export var camera: Camera3D
 
 
@@ -15,7 +18,7 @@ var shake: float = 0.0
 var base_transform: Transform3D
 
 func _on_fishing_system_add_camera_shake(amount: float) -> void:
-	impact = impact + amount
+	impact += amount
 
 func _ready() -> void:
 	base_transform = transform
@@ -24,11 +27,13 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# warn: floating point precision could break here
 	if impact > 0.0:
+		camera_shaking.emit(true)
 		impact = maxf(impact - impact_decay * delta, 0.0)
 		shake = pow(impact, 2)
 		_apply_shake()
 	else:
 		transform = base_transform
+		camera_shaking.emit(false)
 
 func _apply_shake() -> void:
 	var translation = Vector3(

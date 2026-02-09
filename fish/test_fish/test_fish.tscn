@@ -1,20 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cakbfjw703agb"]
+[gd_scene load_steps=4 format=3 uid="uid://cakbfjw703agb"]
 
-[ext_resource type="Script" path="res://fish/test_fish/fish.gd" id="1_3puks"]
+[ext_resource type="Script" uid="uid://ciov2fosm25kv" path="res://fish/test_fish/fish.gd" id="1_3puks"]
 [ext_resource type="Resource" uid="uid://kicqgymp4ag" path="res://fish/fish_data/sea_bass.tres" id="2_3l7mb"]
-[ext_resource type="Shader" uid="uid://l2an82qy41gk" path="res://fish/test_fish/fishshadow.gdshader" id="3_8iq2n"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tta6g"]
 radius = 5.0
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_sficw"]
-size = Vector2(10, 10)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7t6ke"]
-render_priority = 1
-shader = ExtResource("3_8iq2n")
-
-[sub_resource type="SphereMesh" id="SphereMesh_8iq2n"]
 
 [node name="TestFish" type="CharacterBody3D"]
 collision_layer = 2
@@ -26,15 +16,5 @@ fish_data = ExtResource("2_3l7mb")
 shape = SubResource("SphereShape3D_tta6g")
 debug_color = Color(3.3691526e-07, 0.6369832, 0.40198871, 0.41960785)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-cast_shadow = 0
-extra_cull_margin = 16384.0
-lod_bias = 128.0
-ignore_occlusion_culling = true
-mesh = SubResource("PlaneMesh_sficw")
-surface_material_override/0 = SubResource("ShaderMaterial_7t6ke")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-visible = false
-mesh = SubResource("SphereMesh_8iq2n")
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+radius = 5.0

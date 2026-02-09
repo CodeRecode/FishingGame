@@ -12,6 +12,7 @@ signal set_fishing_game_active(value: bool)
 
 var debug_force_success: bool = true
 var _look_at_target: CharacterBody3D = null
+var camera_shaking: bool = false
 
 func _init() -> void:
 	_state_to_activate = Game.State.FISHING
@@ -37,12 +38,15 @@ func _on_look_at_casting_indicator(casting_indicator: CharacterBody3D) -> void:
 	_look_at_target = casting_indicator
 
 
+func _on_camera_shaking(value: bool) -> void:
+	camera_shaking = value
+
 func _process(delta: float) -> void:
 	if !camera:
 		return
 
 	# slide to settle in camera pos
-	if camera_pos:
+	if camera_pos and not camera_shaking:
 		camera.global_position = camera.global_position.lerp(
 			camera_pos.global_position,
 			cam_speed * delta

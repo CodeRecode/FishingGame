@@ -11,9 +11,23 @@ const WAIT_VARIANCE: float = 0.3
 var pond_limits: CollisionShape3D
 var spawn_pos: Vector3 = Vector3.ZERO
 var target_pos: Vector3 = Vector3.ZERO
+var current_pos: Vector3 = Vector3.ZERO
 var moving: bool = false
-var nibbling_or_hooked: bool = false
+var nibbling: bool = false
 var backup_timer: float = 0.0
+
+var wriggling: bool = false
+var wriggle_time: float = 0.12
+var wriggle_progress: float = 0.0
+var wriggle_strength: float = 0.8
+var wriggle_frequency: float = 45.0
+
+var reeling: bool = false
+var reel_start_pos: Vector3 = Vector3.ZERO
+var reel_step_time: float = 0.15
+var reel_timer: float = 0.0
+var reel_progress: float = 0.0
+var reel_step_speed: Vector3 = Vector3.ZERO
 
 
 func activate_fish(start_pos: Vector3, pond: CollisionShape3D) -> void:
@@ -24,7 +38,20 @@ func activate_fish(start_pos: Vector3, pond: CollisionShape3D) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if nibbling_or_hooked:
+	if wriggling:
+		_apply_wriggle(delta)
+
+	if nibbling:
+		return
+
+	var dir: Vector3 = target_pos - global_position
+
+	if reeling:
+		reel_timer += delta
+		reel_progress = reel_timer / reel_step_time
+
+		if reel_progress <= 1:
+			global_position = global_position.lerp(target_pos, reel_progress)
 		return
 
 	if not moving:
@@ -32,7 +59,6 @@ func _physics_process(delta: float) -> void:
 		return
 
 	backup_timer += delta
-	var dir: Vector3 = target_pos - global_position
 
 	if dir.length() < 0.1 or backup_timer > fish_data.wait_time * 2:
 		_pick_new_target()
@@ -43,6 +69,40 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	_keep_fish_in_pond()
 
+
+func reel_fish_towards_caster(cancel_reeling_pos: Vector3, total_steps: int) -> void:
+	reeling = true
+	reel_timer = 0.0
+	reel_start_pos = global_position
+
+	var diff: Vector3 = global_position - cancel_reeling_pos
+	var step_diff: Vector3 = diff / (total_steps - 1)
+
+	step_diff.x = randf_range(step_diff.x - 10, step_diff.x + 10)
+	target_pos = step_diff
+
+
+func start_wriggle() -> void:
+	wriggling = true
+	current_pos = global_position
+
+
+func _apply_wriggle(delta: float) -> void:
+	wriggle_progress += delta
+
+	var t: float = wriggle_progress * wriggle_frequency
+	var offset: Vector3 = Vector3(
+		sin(t),
+		0,
+		cos(t)
+	) * wriggle_strength
+
+	global_position = current_pos + offset
+
+	if wriggle_progress > wriggle_time:
+		wriggle_progress = 0.0
+		wriggling = false
+		global_position = current_pos
 
 func _wait_to_move() -> void:
 	moving = false

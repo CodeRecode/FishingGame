@@ -36,7 +36,8 @@ func _on_fish_detector_body_entered(fish: CharacterBody3D) -> void:
 
 
 func _on_fish_detector_body_exited(fish: Node3D) -> void:
-	if fish is Fish:
+	if fish is Fish and detected_fish:
+		detected_fish.nibbling = false
 		detected_fish = null
 
 
@@ -63,7 +64,7 @@ func physics_update(delta: float) -> State:
 
 	if detected_fish:
 		_nibble(delta)
-		detected_fish.nibbling_or_hooked = true
+		detected_fish.nibbling = true
 
 	if detected_fish != null and Input.is_action_just_pressed("bottom_action"):
 		return hooked_state
@@ -108,6 +109,7 @@ func _nibble(delta: float) -> void:
 		return
 
 	if timer >= detected_fish.fish_data.input_window_seconds and nibble_count < detected_fish.fish_data.nibbles_before_flee:
+		detected_fish.start_wriggle()
 		nibble_count += 1
 		bobber_anim_player.play("bob")
 		add_camera_shake.emit(0.8)

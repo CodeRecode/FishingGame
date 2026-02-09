@@ -67,7 +67,6 @@ func physics_update(delta: float) -> State:
 
 		if starting_index < current_input_index:
 			timer = 0.0
-			add_camera_shake.emit(0.7)
 
 	if current_input_index >= hooked_fish.fish_data.hooking_sequence.size():
 		success_state.fish_caught = hooked_fish

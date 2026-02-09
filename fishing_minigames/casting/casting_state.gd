@@ -19,7 +19,7 @@ const BAR_SLIDE_SPEED: float = 100.0
 #@onready var cast_accuracy_bar: ProgressBar = %CastAccuracy
 
 
-var casting_indicator_start_pos: Vector3 = Vector3.ZERO
+var casting_indicator_start_pos: Vector3 = Vector3(0,-1.5,-60)
 var casting_test_time: float = 0.5
 var casting_time_elapsed: float = 0.0
 
@@ -51,6 +51,8 @@ func exit() -> void:
 	casting_indicator.reset()
 	casting_time_elapsed = 0.0
 	casting_indicator_start_pos = casting_indicator.global_position
+
+	look_at_casting_indicator.emit(null)
 	#cast_distance_bar.visible = false
 	#cast_accuracy_bar.visible = false
 
