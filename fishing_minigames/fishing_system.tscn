@@ -1,10 +1,11 @@
 [gd_scene load_steps=39 format=3 uid="uid://bxf3h3pu0htoa"]
 
 [ext_resource type="Script" uid="uid://b3xar2qf4p0lq" path="res://fishing_minigames/fishing_system.gd" id="1_h4yvn"]
-[ext_resource type="PackedScene" uid="uid://cakbfjw703agb" path="res://fish/test_fish/test_fish.tscn" id="2_bf2fl"]
+[ext_resource type="PackedScene" uid="uid://3y48ivjypo7t" path="res://fish/test_fish/sea_bass.tscn" id="2_5a67j"]
 [ext_resource type="Script" uid="uid://c3vfowirpsvnq" path="res://fishing_minigames/state_machine/state_machine.gd" id="2_k1ehf"]
 [ext_resource type="Script" uid="uid://ch743swetxf8n" path="res://fishing_minigames/pond_limits.gd" id="2_psf8l"]
 [ext_resource type="Script" uid="uid://bicm5muuxnb17" path="res://fishing_minigames/casting/casting_state.gd" id="3_bb444"]
+[ext_resource type="PackedScene" uid="uid://cl6c2pwd7jcki" path="res://fish/test_fish/perch.tscn" id="3_cv827"]
 [ext_resource type="Script" uid="uid://hnxhfijc1jlc" path="res://fishing_minigames/reeling/reeling_state.gd" id="4_xi2u0"]
 [ext_resource type="Script" uid="uid://dih6brdi1cxgx" path="res://fishing_minigames/hooked/hooked_state.gd" id="5_n2vtn"]
 [ext_resource type="Script" uid="uid://cs5x5bdp4wcay" path="res://fishing_minigames/landing/landing_state.gd" id="6_d7i3u"]
@@ -16,8 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dg5wk3qayeij6" path="res://ui/ui_input_prompts/keyboard-&-mouse_sheet_default.png" id="13_d7i3u"]
 [ext_resource type="Script" uid="uid://bqub03ns3ycxw" path="res://fishing_minigames/input_type_listener.gd" id="14_psf8l"]
 [ext_resource type="PackedScene" uid="uid://c86voktfp1rx3" path="res://art/object/bobber.glb" id="15_5a67j"]
-[ext_resource type="Script" path="res://fishing_minigames/casting/casting_indicator.gd" id="15_8p5y1"]
-[ext_resource type="PackedScene" uid="uid://p08kc82b12gs" path="res://test_world/art_world/art_world.tscn" id="17_vpnoa"]
+[ext_resource type="Script" uid="uid://cl4f2djgw1dky" path="res://fishing_minigames/casting/casting_indicator.gd" id="15_8p5y1"]
 [ext_resource type="AudioStream" uid="uid://ypmon0vf03is" path="res://audio/183500__ecfike__piano-cord.ogg" id="18_lu7ow"]
 [ext_resource type="AudioStream" uid="uid://dl03j7uw8htsq" path="res://audio/159765__timgormly__cowbell_os_5.ogg" id="19_y6rqc"]
 
@@ -66,10 +66,7 @@ region = Rect2(196, 64, 64, 64)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_h4yvn"]
 height = 5.0
-radius = 2.5
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h4yvn"]
-albedo_color = Color(0.5788026, 0, 0.29113695, 1)
+radius = 0.7036133
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_k1ehf"]
 
@@ -78,7 +75,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CSGCylinder3D:position")
+tracks/0/path = NodePath("bobber:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -94,14 +91,14 @@ length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CSGCylinder3D:position")
+tracks/0/path = NodePath("bobber:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.000512464, 0.06666667, 0.16666667),
-"transitions": PackedFloat32Array(1, 1, 0.33440053, 1),
+"times": PackedFloat32Array(0, 0.102686405),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, -1, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, -0.5, 0), Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bb444"]
@@ -110,12 +107,15 @@ _data = {
 &"bob": SubResource("Animation_h4yvn")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h4yvn"]
+albedo_color = Color(0.5788026, 0, 0.29113695, 1)
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_lu7ow"]
 radius = 5.0
 
 [node name="FishingSystem" type="Node"]
 script = ExtResource("1_h4yvn")
-test_fish_array = Array[PackedScene]([ExtResource("2_bf2fl"), ExtResource("2_bf2fl"), ExtResource("2_bf2fl"), ExtResource("2_bf2fl")])
+test_fish_array = Array[PackedScene]([ExtResource("2_5a67j"), ExtResource("2_5a67j"), ExtResource("3_cv827"), ExtResource("3_cv827"), ExtResource("3_cv827")])
 
 [node name="PondLimits" type="Area3D" parent="."]
 unique_name_in_owner = true
@@ -336,18 +336,13 @@ texture_normal = SubResource("AtlasTexture_cv827")
 
 [node name="BobberTest" type="CharacterBody3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -11)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.785349, -11)
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BobberTest"]
 shape = SubResource("CylinderShape3D_h4yvn")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="BobberTest"]
-visible = false
-material = SubResource("StandardMaterial3D_h4yvn")
-
 [node name="bobber" parent="BobberTest" instance=ExtResource("15_5a67j")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.5722301, 0)
 
 [node name="FishDetector" type="Area3D" parent="BobberTest"]
 collision_layer = 0
@@ -390,7 +385,7 @@ script = ExtResource("14_psf8l")
 
 [node name="CancelReelingArea" type="Area3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 collision_layer = 0
 monitorable = false
 

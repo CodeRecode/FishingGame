@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://cl6c2pwd7jcki"]
+
+[ext_resource type="Script" uid="uid://ciov2fosm25kv" path="res://fish/test_fish/fish.gd" id="1_4s4iu"]
+[ext_resource type="Resource" uid="uid://bbhjcdba6cw8i" path="res://fish/fish_data/perch.tres" id="2_4s4iu"]
+[ext_resource type="Shader" uid="uid://l2an82qy41gk" path="res://fish/test_fish/fishshadow.gdshader" id="3_dynh8"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tta6g"]
+radius = 5.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_u84ab"]
+size = Vector2(10, 10)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5olpc"]
+render_priority = 1
+shader = ExtResource("3_dynh8")
+
+[sub_resource type="SphereMesh" id="SphereMesh_wgm2y"]
+
+[node name="Perch" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_4s4iu")
+fish_data = ExtResource("2_4s4iu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_tta6g")
+debug_color = Color(3.3691526e-07, 0.6369832, 0.40198871, 0.41960785)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+cast_shadow = 0
+extra_cull_margin = 16384.0
+lod_bias = 128.0
+ignore_occlusion_culling = true
+mesh = SubResource("PlaneMesh_u84ab")
+surface_material_override/0 = SubResource("ShaderMaterial_5olpc")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+mesh = SubResource("SphereMesh_wgm2y")

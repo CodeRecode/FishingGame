@@ -39,7 +39,7 @@ func enter(_previous_state: State) -> void:
 
 func exit() -> void:
 	countdown_prompt.set_visibility(false)
-	bobber.visible = false
+	#bobber.visible = false
 	bobber.global_position = Vector3(0,0,-11)
 
 

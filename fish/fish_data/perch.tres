@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="FishResource" load_steps=3 format=3 uid="uid://bbhjcdba6cw8i"]
+
+[ext_resource type="Script" uid="uid://b5ikj8rk84yj0" path="res://fish/fish_resource.gd" id="1_dc71g"]
+[ext_resource type="PackedScene" uid="uid://io86veitfvu3" path="res://fish/fish_data/perch.glb" id="2_dc71g"]
+
+[resource]
+script = ExtResource("1_dc71g")
+id = 1
+display_name = "Perch"
+visual = ExtResource("2_dc71g")
+move_radius = 45.0
+move_speed = 800.0
+wait_time = 1.0
+hooking_sequence = Array[int]([3, 2, 0, 2, 3])
+landing_sequence = Array[int]([4])
+input_window_seconds = 1.2
+nibbles_before_flee = 2
+metadata/_custom_type_script = "uid://b5ikj8rk84yj0"

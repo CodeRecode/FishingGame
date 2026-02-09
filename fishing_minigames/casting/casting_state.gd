@@ -76,7 +76,9 @@ func physics_update(delta: float) -> State:
 			casting_indicator.update_casting_visual(casting_time_elapsed / casting_test_time)
 
 			if Input.is_action_just_pressed("bottom_action"):
-				reeling_state.bobber_starting_position = random_point_along_radius(casting_indicator.global_position, casting_indicator.accuracy_indicator.inner_radius)
+				var bobber_start: Vector3 = casting_indicator.global_position
+				bobber_start.y = -1
+				reeling_state.bobber_starting_position = random_point_along_radius(bobber_start, casting_indicator.accuracy_indicator.inner_radius)
 				casting_indicator.global_position = casting_indicator_start_pos
 				return reeling_state
 

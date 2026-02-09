@@ -23,7 +23,7 @@ func _pick_random_spawn_point() -> Vector3:
 
 	var pos: Vector3 = Vector3(
 		cos(angle) * dist_from_center,
-		0.0,
+		-1.5,
 		sin(angle) * dist_from_center
 	)
 

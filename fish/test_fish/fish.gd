@@ -24,6 +24,8 @@ var wriggle_frequency: float = 45.0
 
 var reeling: bool = false
 var reel_start_pos: Vector3 = Vector3.ZERO
+var reel_target_pos: Vector3 = Vector3.ZERO
+var reel_step: int = 0
 var reel_step_time: float = 0.15
 var reel_timer: float = 0.0
 var reel_progress: float = 0.0
@@ -73,13 +75,18 @@ func _physics_process(delta: float) -> void:
 func reel_fish_towards_caster(cancel_reeling_pos: Vector3, total_steps: int) -> void:
 	reeling = true
 	reel_timer = 0.0
-	reel_start_pos = global_position
+	if reel_start_pos == Vector3.ZERO:
+		reel_start_pos = global_position
+		reel_target_pos = cancel_reeling_pos
+		reel_step = 1
 
-	var diff: Vector3 = global_position - cancel_reeling_pos
-	var step_diff: Vector3 = diff / (total_steps - 1)
+	var diff: Vector3 = (reel_target_pos - reel_start_pos) / total_steps
+	diff.x = randf_range(diff.x - 10, diff.x + 10)
 
-	step_diff.x = randf_range(step_diff.x - 10, step_diff.x + 10)
-	target_pos = step_diff
+	target_pos = reel_start_pos + (diff * reel_step)
+	if reel_step == total_steps:
+		target_pos = cancel_reeling_pos
+	reel_step += 1
 
 
 func start_wriggle() -> void:
